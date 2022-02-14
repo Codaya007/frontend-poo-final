@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 
 // Intial State
 const intialState = {
-   token: localStorage.getItem('token_ecommerce'),
+   token: localStorage.getItem('token_poo'),
    isAuthenticated: null,
    loading: true,
    user: null,
@@ -30,7 +30,7 @@ export default function reducer(state = intialState, action) {
       case REGISTER_SUCCESS:
       case LOGIN_SUCCESS:
          // Set Token in localstorage
-         localStorage.setItem('token_ecommerce', payload.token);
+         localStorage.setItem('token_poo', payload.token);
          return {
             ...state,
             ...payload,
@@ -47,7 +47,7 @@ export default function reducer(state = intialState, action) {
       case AUTH_ERROR:
       case LOGOUT:
          // Remove Token in localstorage
-         localStorage.removeItem('token_ecommerce');
+         localStorage.removeItem('token_poo');
          return {
             ...state,
             token: null,

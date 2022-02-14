@@ -8,8 +8,8 @@ import setAuthToken from './helpers/setAuthToken';
 import { useEffect } from 'react';
 import { loadUser } from './data/actions';
 
-if (localStorage.token_ecommerce) {
-  setAuthToken(localStorage.token_ecommerce);
+if (localStorage.token_poo) {
+  setAuthToken(localStorage.token_poo);
 }
 
 function App() {

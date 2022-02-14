@@ -7,8 +7,8 @@ import { AUTH_ERROR, LOGIN_FAIL, LOGIN_SUCCESS, LOGOUT, REGISTER_FAIL, REGISTER_
 
 // OBTENER INFORMACIÓN DEL USUARIO
 export const loadUser = () => async (dispatch) => {
-   if (localStorage.token_ecommerce) {
-      setAuthToken(localStorage.token_ecommerce)
+   if (localStorage.token_poo) {
+      setAuthToken(localStorage.token_poo)
    }
 
    try {
