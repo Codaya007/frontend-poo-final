@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import { Navigate } from "react-router-dom";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Button from "../components/button/button.component";
 import Container from "../components/container/container.component";
 import FormInput from "../components/inputs/input.component";
 import { login } from "../data/actions";
-import "./loading.css";
-
+import Loader from "../components/loader/Loader";
 const initialState = {
   email: "",
   password: "",
@@ -27,7 +26,11 @@ const validateData = (data) => {
   return errors;
 };
 
-const Login = ({ login, isAuth, isLoading, user }) => {
+const Login = () => {
+  const dispatch = useDispatch();
+  const isAuth = useSelector((state) => state.auth.isAuthenticated);
+  const isLoading = useSelector((state) => state.auth.loading);
+  const user = useSelector((state) => state.auth.user);
   const [data, setData] = useState(initialState);
   const [errors, setErrors] = useState({});
   const { email, password } = data;
@@ -40,9 +43,9 @@ const Login = ({ login, isAuth, isLoading, user }) => {
     setErrors(validateData(newData));
   };
 
-  const onSubmit = async (e) => {
+  const onSubmit = (e) => {
     e.preventDefault();
-    login({ email, password });
+    dispatch(login({ email, password }));
   };
 
   if (isAuth && user) {
@@ -74,7 +77,7 @@ const Login = ({ login, isAuth, isLoading, user }) => {
           type="password"
         />
         {errors.password && <span>{errors.password}</span>}
-        {isLoading && <div id="loading" className="self-center mb-3" />}
+        {isLoading && <Loader />}
         {!isLoading && (
           <Button
             title="Ingresar"
@@ -96,10 +99,4 @@ const Login = ({ login, isAuth, isLoading, user }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  isAuth: state.auth.isAuthenticated,
-  isLoading: state.auth.loading,
-  user: state.auth.user,
-});
-
-export default connect(mapStateToProps, { login })(Login);
+export default Login;

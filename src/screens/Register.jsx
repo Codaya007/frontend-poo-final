@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { Navigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import Button from "../components/button/button.component";
 import Container from "../components/container/container.component";
 import FormInput from "../components/inputs/input.component";
 import { register } from "../data/actions";
-import "./loading.css";
+import Loader from "../components/loader/Loader";
 
 const initialState = {
   name: "",
@@ -17,9 +17,9 @@ const initialState = {
   address: "",
 };
 
-const Register = ({ register, isAuth, isLoading, user }) => {
+const Register = ({ isAuth, isLoading, user }) => {
   const [form, setForm] = useState(initialState);
-
+  const dispatch = useDispatch();
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -33,7 +33,7 @@ const Register = ({ register, isAuth, isLoading, user }) => {
     if (password !== confirmPassword) {
       toast("La contraseña no coincide");
     } else {
-      register({ name, lastname, email, password, address });
+      dispatch(register({ name, lastname, email, password, address }));
     }
   };
 
@@ -98,7 +98,7 @@ const Register = ({ register, isAuth, isLoading, user }) => {
           handleChange={handleChange}
           type="password"
         />
-        {isLoading && <div id="loading" className="" />}
+        {isLoading && <Loader />}
         {!isLoading && (
           <Button
             title="Registrarse"
@@ -110,7 +110,7 @@ const Register = ({ register, isAuth, isLoading, user }) => {
         <div>
           <Button
             isButton={false}
-            title="already have an account?"
+            title="Ya tienes una cuenta? Inicia sesión"
             href="/login"
             moreStyle="text-gray-600"
           />
@@ -126,4 +126,4 @@ const mapStateToProps = (state) => ({
   user: state.auth.user,
 });
 
-export default connect(mapStateToProps, { register })(Register);
+export default connect(mapStateToProps, null)(Register);
