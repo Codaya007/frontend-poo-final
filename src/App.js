@@ -5,12 +5,23 @@ import store from './data/store'
 // routes config
 import AppRoutes from './app.routes';
 import { useEffect } from 'react';
-import { loadUser } from './data/actions';
+import { loadUser, getAllProducts, setLoadingAuth, getAllOrdersByUser } from './data/actions';
 
 function App() {
 
   useEffect(() => {
-    store.dispatch(loadUser());
+    // Si hay un token solicito la info de usuario
+    if (localStorage.token_poo) {
+      store.dispatch(loadUser());
+      store.dispatch(getAllOrdersByUser());
+    } else {
+      // Sino, le pongo el loading en false
+      store.dispatch(setLoadingAuth(false));
+    }
+  }, []);
+
+  useEffect(() => {
+    store.dispatch(getAllProducts());
   }, []);
 
   return (

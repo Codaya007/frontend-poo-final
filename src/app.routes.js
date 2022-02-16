@@ -11,6 +11,7 @@ import Login from './screens/Login';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import User from './screens/User';
+import OrderDetail from './components/orders/OrderDetail';
 
 const AppRoutes = () => {
    return (
@@ -25,6 +26,9 @@ const AppRoutes = () => {
                   <Route path='login' element={<Login />} />
                   <Route path='user' element={<User />} />
                   <Route path='*' element={<Error404 />} />
+                  <Route path='order'>
+                     <Route path=':id' element={<OrderDetail />} />
+                  </Route>
                </Route>
             </Routes>
          </BrowserRouter>

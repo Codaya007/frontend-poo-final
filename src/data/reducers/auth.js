@@ -33,14 +33,15 @@ export default function reducer(state = intialState, action) {
          localStorage.setItem('token_poo', payload);
          return {
             ...state,
-            ...payload,
+            token: payload,
             isAuthenticated: true,
             loadingAuth: false,
          };
       case SET_LOADING_AUTH:
+         // console.log(payload)
          return {
             ...state,
-            loadingAuth: true
+            loadingAuth: payload
          }
       case REGISTER_FAIL:
       case LOGIN_FAIL:

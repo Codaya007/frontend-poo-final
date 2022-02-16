@@ -1,5 +1,5 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Button from "../button/button.component";
 import NavItem from "./navbar.item";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,6 +7,7 @@ import { logout } from "../../data/actions";
 
 const NavbarList = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const isAuth = useSelector((state) => state.auth.isAuthenticated);
   const user = useSelector((state) => state.auth.user);
   // to define the actual route
@@ -22,14 +23,19 @@ const NavbarList = () => {
     }
   };
 
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate("/");
+  };
+
   return (
     <ul className="list-navbar">
       <NavItem link="/" name="Home" listStyle={isActive(location, "/")} />
-      {isAuth && user.rol === 1 && (
+      {isAuth && user && user.rol === 1 && (
         <NavItem
-          link="/dashboard"
+          link="/dashboard/admin"
           name="Dashboard"
-          listStyle={isActive(location, "/dashboard")}
+          listStyle={isActive(location, "/dashboard/admin")}
         />
       )}
       <NavItem
@@ -37,17 +43,19 @@ const NavbarList = () => {
         name="Carrito"
         listStyle={isActive(location, "/cart")}
       />
-      <NavItem
-        link="/user"
-        name="Mi perfil"
-        listStyle={isActive(location, "/user")}
-      />
       {isAuth && (
-        <Button
-          title="Salir"
-          moreStyle="hover:text-primary"
-          action={() => dispatch(logout())}
-        />
+        <>
+          <NavItem
+            link="/user"
+            name="Mi perfil"
+            listStyle={isActive(location, "/user")}
+          />
+          <Button
+            title="Salir"
+            moreStyle="hover:text-primary"
+            action={handleLogout}
+          />
+        </>
       )}
       {!isAuth && (
         <>

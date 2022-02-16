@@ -4,14 +4,15 @@ import Loader from "../components/loader/Loader";
 
 const Profile = () => {
   const user = useSelector((state) => state.auth.user);
-  const isLoading = useSelector((state) => state.auth.loading);
+  const isLoading = useSelector((state) => state.auth.loadingAuth);
 
   return (
     <div>
-      {isLoading ? (
+      {isLoading || !user ? (
         <Loader />
       ) : (
         <>
+          <h2>Mi perfil</h2>
           <img className="logo" src={user.avatar} alt="Profile" />
           <div className="section">
             <div className="subtitle">Nombre</div>
