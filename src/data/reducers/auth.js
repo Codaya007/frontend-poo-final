@@ -1,11 +1,11 @@
-import { AUTH_ERROR, LOGIN_FAIL, LOGIN_SUCCESS, LOGOUT, REGISTER_FAIL, REGISTER_SUCCESS, SET_LOADING, USER_LOADED } from "../actions/types";
+import { AUTH_ERROR, LOGIN_FAIL, LOGIN_SUCCESS, LOGOUT, REGISTER_FAIL, REGISTER_SUCCESS, SET_LOADING_AUTH, USER_LOADED } from "../actions/types";
 import { toast } from "react-toastify";
 
 // Intial State
 const intialState = {
    token: localStorage.getItem('token_poo'),
    isAuthenticated: null,
-   loading: true,
+   loadingAuth: true,
    user: null,
 };
 
@@ -25,7 +25,7 @@ export default function reducer(state = intialState, action) {
             ...state,
             user: payload,
             isAuthenticated: true,
-            loading: false
+            loadingAuth: false
          }
       case REGISTER_SUCCESS:
       case LOGIN_SUCCESS:
@@ -33,14 +33,15 @@ export default function reducer(state = intialState, action) {
          localStorage.setItem('token_poo', payload);
          return {
             ...state,
-            ...payload,
+            token: payload,
             isAuthenticated: true,
-            loading: false,
+            loadingAuth: false,
          };
-      case SET_LOADING:
+      case SET_LOADING_AUTH:
+         // console.log(payload)
          return {
             ...state,
-            loading: true
+            loadingAuth: payload
          }
       case REGISTER_FAIL:
       case LOGIN_FAIL:
@@ -52,7 +53,7 @@ export default function reducer(state = intialState, action) {
             ...state,
             token: null,
             isAuthenticated: false,
-            loading: false,
+            loadingAuth: false,
             user: null
          };
       default:

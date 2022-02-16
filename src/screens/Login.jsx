@@ -51,7 +51,7 @@ const Login = () => {
   if (isAuth && user) {
     const { role } = user;
 
-    if (role === 0) return <Navigate to="/dashboard/user" />;
+    if (role === 0) return <Navigate to="/" />;
     if (role === 1) return <Navigate to="/dashboard/admin" />;
   }
 
