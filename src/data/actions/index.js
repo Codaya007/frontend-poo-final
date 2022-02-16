@@ -3,13 +3,12 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import { URL_REGISTER, URL_LOGIN, USER_GET_INFO } from '../../assets/constants';
 import getHeaderToken from '../../helpers/getHeaderToken';
-import { AUTH_ERROR, LOGIN_FAIL, LOGIN_SUCCESS, LOGOUT, REGISTER_FAIL, REGISTER_SUCCESS, SET_LOADING, USER_LOADED } from './types';
+import { AUTH_ERROR, LOGIN_FAIL, LOGIN_SUCCESS, LOGOUT, REGISTER_FAIL, REGISTER_SUCCESS, SET_LOADING_AUTH, USER_LOADED } from './types';
 
 // OBTENER INFORMACIÓN DEL USUARIO
 export const loadUser = () => async (dispatch) => {
    // Set config
    const config = getHeaderToken();
-   // console.log(config);
    try {
       const res = await axios.get(USER_GET_INFO, config);
       dispatch({
@@ -42,7 +41,7 @@ export const register = ({
    });
 
    dispatch({
-      type: SET_LOADING
+      type: SET_LOADING_AUTH
    })
    try {
       // Response 
@@ -70,7 +69,7 @@ export const register = ({
 // LOGUEAR USUARIO
 export const login = (body) => async (dispatch) => {
    dispatch({
-      type: SET_LOADING
+      type: SET_LOADING_AUTH
    })
    try {
       // Response 
@@ -102,4 +101,9 @@ export const logout = () => {
    return {
       type: LOGOUT
    };
+}
+
+// OBTENER TODOS LOS PRODUCTOS
+export const getAllProducts = () => async (dispatch) => {
+
 }
