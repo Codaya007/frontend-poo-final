@@ -4,13 +4,8 @@ import { Provider } from 'react-redux';
 import store from './data/store'
 // routes config
 import AppRoutes from './app.routes';
-import setAuthToken from './helpers/setAuthToken';
 import { useEffect } from 'react';
 import { loadUser } from './data/actions';
-
-if (localStorage.token_poo) {
-  setAuthToken(localStorage.token_poo);
-}
 
 function App() {
 

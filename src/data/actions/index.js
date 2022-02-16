@@ -2,17 +2,16 @@
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { URL_REGISTER, URL_LOGIN, USER_GET_INFO } from '../../assets/constants';
-import setAuthToken from '../../helpers/setAuthToken';
+import getHeaderToken from '../../helpers/getHeaderToken';
 import { AUTH_ERROR, LOGIN_FAIL, LOGIN_SUCCESS, LOGOUT, REGISTER_FAIL, REGISTER_SUCCESS, SET_LOADING, USER_LOADED } from './types';
 
 // OBTENER INFORMACIÓN DEL USUARIO
 export const loadUser = () => async (dispatch) => {
-   if (localStorage.token_poo) {
-      setAuthToken(localStorage.token_poo)
-   }
-
+   // Set config
+   const config = getHeaderToken();
+   // console.log(config);
    try {
-      const res = await axios.get(USER_GET_INFO);
+      const res = await axios.get(USER_GET_INFO, config);
       dispatch({
          type: USER_LOADED,
          payload: res.data
@@ -33,13 +32,6 @@ export const register = ({
    password,
    address
 }) => async (dispatch) => {
-   // Config header for axios
-   const config = {
-      headers: {
-         'Content-Type': 'application/json',
-      },
-   };
-
    // Set body
    const body = JSON.stringify({
       name,
@@ -54,7 +46,7 @@ export const register = ({
    })
    try {
       // Response 
-      const res = await axios.post(URL_REGISTER, body, config)
+      const res = await axios.post(URL_REGISTER, body);
 
       console.log(res.data);
       dispatch({
@@ -76,40 +68,26 @@ export const register = ({
 };
 
 // LOGUEAR USUARIO
-export const login = ({
-   email,
-   password
-}) => async (dispatch) => {
-   // Config header for axios
-   const config = {
-      headers: {
-         'Content-Type': 'application/json',
-      },
-   };
-
-   // Set body
-   const body = JSON.stringify({
-      email,
-      password
-   });
-
+export const login = (body) => async (dispatch) => {
    dispatch({
       type: SET_LOADING
    })
    try {
       // Response 
-      const res = await axios.post(URL_LOGIN, body, config)
+      const res = await axios.post(URL_LOGIN, body);
+      // console.log(res.data.token);
 
       dispatch({
          type: LOGIN_SUCCESS,
-         payload: res.data
+         payload: res.data.token
       })
       dispatch(loadUser())
    } catch (err) {
       const errors = err.response.data.errors
       if (errors) {
-         // errors.forEach(error => toast(error.msg))
+         const errors = err.response.data.errors
          console.log(errors);
+         errors.forEach(error => toast.error(error.msg))
       }
 
       dispatch({
@@ -120,8 +98,8 @@ export const login = ({
 
 
 // CERRAR SESIÓN USUARIO
-export const logout = () => dispatch => {
-   dispatch({
+export const logout = () => {
+   return {
       type: LOGOUT
-   })
+   };
 }

@@ -30,7 +30,7 @@ export default function reducer(state = intialState, action) {
       case REGISTER_SUCCESS:
       case LOGIN_SUCCESS:
          // Set Token in localstorage
-         localStorage.setItem('token_poo', payload.token);
+         localStorage.setItem('token_poo', payload);
          return {
             ...state,
             ...payload,

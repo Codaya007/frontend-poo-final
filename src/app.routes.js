@@ -10,6 +10,7 @@ import Login from './screens/Login';
 // Toast
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import User from './screens/User';
 
 const AppRoutes = () => {
    return (
@@ -22,6 +23,7 @@ const AppRoutes = () => {
                   <Route index element={<Home />} />
                   <Route path='register' element={<Register />} />
                   <Route path='login' element={<Login />} />
+                  <Route path='user' element={<User />} />
                   <Route path='*' element={<Error404 />} />
                </Route>
             </Routes>

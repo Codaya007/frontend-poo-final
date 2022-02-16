@@ -2,10 +2,13 @@ import React from "react";
 import { useLocation } from "react-router-dom";
 import Button from "../button/button.component";
 import NavItem from "./navbar.item";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../data/actions";
 
-const NavbarList = ({ logout = () => {}, isAuth = false }) => {
+const NavbarList = () => {
+  const dispatch = useDispatch();
+  const isAuth = useSelector((state) => state.auth.isAuthenticated);
+  const user = useSelector((state) => state.auth.user);
   // to define the actual route
   const location = useLocation();
 
@@ -22,23 +25,28 @@ const NavbarList = ({ logout = () => {}, isAuth = false }) => {
   return (
     <ul className="list-navbar">
       <NavItem link="/" name="Home" listStyle={isActive(location, "/")} />
+      {isAuth && user.rol === 1 && (
+        <NavItem
+          link="/dashboard"
+          name="Dashboard"
+          listStyle={isActive(location, "/dashboard")}
+        />
+      )}
       <NavItem
-        link="/shop"
-        name="Productos"
-        listStyle={isActive(location, "/shop")}
+        link="/cart"
+        name="Carrito"
+        listStyle={isActive(location, "/cart")}
       />
       <NavItem
-        link="/dashboard"
-        name="Dashboard"
-        listStyle={isActive(location, "/dashboard")}
+        link="/user"
+        name="Mi perfil"
+        listStyle={isActive(location, "/user")}
       />
       {isAuth && (
         <Button
           title="Salir"
           moreStyle="hover:text-primary"
-          action={() => {
-            logout();
-          }}
+          action={() => dispatch(logout())}
         />
       )}
       {!isAuth && (
@@ -61,8 +69,4 @@ const NavbarList = ({ logout = () => {}, isAuth = false }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  isAuth: state.auth.isAuthenticated,
-});
-
-export default connect(mapStateToProps, { logout })(NavbarList);
+export default NavbarList;
