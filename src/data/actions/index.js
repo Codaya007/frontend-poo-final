@@ -1,9 +1,35 @@
 // ACCIONES REDUX
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import { URL_REGISTER, URL_LOGIN, USER_GET_INFO, URL_GET_ALL_PRODUCTS, URL_GET_ORDERS_BY_USER } from '../../assets/constants';
 import getHeaderToken from '../../helpers/getHeaderToken';
-import { AUTH_ERROR, GET_ALL_PRODUCTS, GET_ORDERS_BY_USER, LOGIN_FAIL, LOGIN_SUCCESS, LOGOUT, REGISTER_FAIL, REGISTER_SUCCESS, SET_LOADING_AUTH, SET_LOADING_ORDERS, SET_LOADING_PRODUCTS, USER_LOADED } from './types';
+import {
+   URL_REGISTER,
+   URL_LOGIN,
+   USER_GET_INFO,
+   URL_GET_ALL_PRODUCTS,
+   URL_GET_ORDERS_BY_USER
+} from '../../assets/constants';
+import {
+   AUTH_ERROR,
+   GET_ALL_PRODUCTS,
+   GET_ORDERS_BY_USER,
+   LOGIN_FAIL,
+   LOGIN_SUCCESS,
+   LOGOUT,
+   REGISTER_FAIL,
+   REGISTER_SUCCESS,
+   SET_LOADING_AUTH,
+   SET_LOADING_ORDERS,
+   SET_LOADING_PRODUCTS,
+   USER_LOADED,
+   ADD_TO_CART,
+   CLEAR_CART,
+   REMOVE_ALL_FROM_CART,
+   REMOVE_ONE_FROM_CART,
+   LOAD_ORDER,
+   LOAD_PRODUCTS_ORDER
+} from './types';
+
 
 // OBTENER INFORMACIÓN DEL USUARIO
 export const loadUser = () => async (dispatch) => {
@@ -164,3 +190,28 @@ export const getAllOrdersByUser = () => async (dispatch) => {
       })
    }
 }
+
+
+export const addToCart = (id) => ({ type: ADD_TO_CART, payload: id });
+
+export const delFromCart = (id, all = false) =>
+   all
+      ? { type: REMOVE_ALL_FROM_CART, payload: id }
+      : { type: REMOVE_ONE_FROM_CART, payload: id };
+
+export const clearCart = () => ({ type: CLEAR_CART });
+
+export const loadOrder = (order) => ({ type: LOAD_ORDER, payload: order });
+
+export const loadProductsOrder = (products) => async (dispatch) => {
+   try {
+      const pedido = await axios.post(
+         "",
+         products,
+         getHeaderToken()
+      );
+   } catch (error) {
+
+   }
+   return { type: LOAD_PRODUCTS_ORDER, payload: products }
+};

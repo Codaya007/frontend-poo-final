@@ -1,5 +1,5 @@
 import {
-   GET_ORDERS_BY_USER, LOAD_ORDER_DETAIL
+   GET_ORDERS_BY_USER, SET_ORDER,
 } from "../actions/types";
 // import { toast } from "react-toastify";
 
@@ -7,6 +7,15 @@ import {
 const intialState = {
    miOrders: [],
    loadingOrders: false,
+   currentOrder: {
+      country: "",
+      city: "",
+      address: "",
+      reference: "",
+      products: [
+         //{ "productId": "620add8140ca49bf1801a878", "quantity": 2 }
+      ]
+   }
 };
 
 // Reducers REDUX
@@ -15,7 +24,10 @@ export default function reducer(state = intialState, action) {
       type,
       payload
    } = action;
+
    switch (type) {
+      case SET_ORDER:
+         return { ...state, currentOrder: { ...state.currentOrder, ...payload } };
       case GET_ORDERS_BY_USER:
          return { ...state, miOrders: payload };
       default:

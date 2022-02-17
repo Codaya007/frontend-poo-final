@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { BASEURL } from "../../assets/constants";
 import getHeaderToken from "../../helpers/getHeaderToken";
@@ -10,6 +10,7 @@ const OrderDetail = () => {
   const [order, setOrder] = useState(null);
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const {
     address,
@@ -114,6 +115,9 @@ const OrderDetail = () => {
           </tr>
         </tbody>
       </table>
+      {paid && (
+        <button onClick={() => navigate(`/payment/${id}`)}>Pagar</button>
+      )}
     </div>
   ) : (
     <div>No hay datos</div>
