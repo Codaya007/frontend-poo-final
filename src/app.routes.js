@@ -18,6 +18,7 @@ import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { saveCartLocalStorage } from './helpers/cartLocalStorage';
 import PaymentForm from './components/orders/Payment.form';
+import Dashboard from './components/admin/Dashboard';
 
 const AppRoutes = () => {
    const cart = useSelector(state => state.products.cart);
@@ -44,6 +45,9 @@ const AppRoutes = () => {
                   </Route>
                   <Route path='payment'>
                      <Route path=':orderId' element={<PaymentForm />} />
+                  </Route>
+                  <Route path='dashboard'>
+                     <Route path='admin' element={<Dashboard />} />
                   </Route>
                   <Route path='*' element={<Error404 />} />
                </Route>

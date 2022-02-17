@@ -28,7 +28,8 @@ import {
    REMOVE_ALL_FROM_CART,
    REMOVE_ONE_FROM_CART,
    CREATE_ORDER,
-   CLEAR_ORDER
+   CLEAR_ORDER,
+   GET_ALL_CATEGORIES
 } from './types';
 
 
@@ -236,5 +237,19 @@ export const deleteOrder = (id) => async (dispatch) => {
    } catch (error) {
       console.log(error.response.data);
       toast.error("No se ha podido eliminar el pedido");
+   }
+}
+
+// categories
+export const getAllCategories = () => async (dispatch) => {
+   try {
+      const { data } = await axios.get(`${BASEURL}/category/all`);
+
+      // console.log("en actions");
+      // console.log(data);
+      dispatch({ type: GET_ALL_CATEGORIES, payload: data });
+   } catch (error) {
+      console.log(error.response.data);
+      toast.warning("No se han podido cargar las categorìas");
    }
 }
