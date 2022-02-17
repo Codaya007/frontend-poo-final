@@ -12,12 +12,15 @@ import getHeaderToken from "../../helpers/getHeaderToken";
 import { BASEURL, PUBLIC_KEY_STRIPE } from "../../assets/constants";
 import { toast } from "react-toastify";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { getAllOrdersByUser } from "../../data/actions";
 
 const stripePromise = loadStripe(PUBLIC_KEY_STRIPE);
 
 const CheckoutForm = ({ orderId, amount, setPaid }) => {
   const stripe = useStripe();
   const elements = useElements();
+  const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
@@ -43,6 +46,7 @@ const CheckoutForm = ({ orderId, amount, setPaid }) => {
         console.log(data);
         toast.info(data);
         elements.getElement(CardElement).clear();
+        dispatch(getAllOrdersByUser());
       } catch (error) {
         console.log(error.response.data);
         toast.error(error.response.data);
