@@ -7,7 +7,8 @@ import {
    URL_LOGIN,
    USER_GET_INFO,
    URL_GET_ALL_PRODUCTS,
-   URL_GET_ORDERS_BY_USER
+   URL_GET_ORDERS_BY_USER,
+   BASEURL
 } from '../../assets/constants';
 import {
    AUTH_ERROR,
@@ -26,8 +27,8 @@ import {
    CLEAR_CART,
    REMOVE_ALL_FROM_CART,
    REMOVE_ONE_FROM_CART,
-   LOAD_ORDER,
-   LOAD_PRODUCTS_ORDER
+   CREATE_ORDER,
+   CLEAR_ORDER
 } from './types';
 
 
@@ -170,10 +171,10 @@ export const setLoadingOrders = (loading = true) => {
 
 // OBTENER TODAS LAS ÓRDENES DE UN USUARIO
 export const getAllOrdersByUser = () => async (dispatch) => {
-   // Seteo en true el loading
-   dispatch(setLoadingOrders());
-   // Realizo la petición a la API
    try {
+      // Seteo en true el loading
+      dispatch(setLoadingOrders(true));
+      // Realizo la petición a la API
       const res = await axios.get(URL_GET_ORDERS_BY_USER, getHeaderToken());
       console.log(res.data);
 
@@ -188,6 +189,8 @@ export const getAllOrdersByUser = () => async (dispatch) => {
          type: SET_LOADING_PRODUCTS,
          payload: false
       })
+   } finally {
+      dispatch(setLoadingOrders(false));
    }
 }
 
@@ -201,17 +204,37 @@ export const delFromCart = (id, all = false) =>
 
 export const clearCart = () => ({ type: CLEAR_CART });
 
-export const loadOrder = (order) => ({ type: LOAD_ORDER, payload: order });
-
-export const loadProductsOrder = (products) => async (dispatch) => {
+export const createOrder = (order) => async (dispatch) => {
    try {
-      const pedido = await axios.post(
-         "",
-         products,
+      dispatch(setLoadingOrders(true));
+      const { data } = await axios.post(
+         `${BASEURL}/order`,
+         order,
          getHeaderToken()
       );
+      console.table(data);
+      dispatch(clearCart());
+      dispatch(getAllOrdersByUser());
+      return dispatch({ type: CREATE_ORDER, payload: data });
    } catch (error) {
-
+      console.log(error.response);
+   } finally {
+      dispatch(setLoadingOrders(false));
    }
-   return { type: LOAD_PRODUCTS_ORDER, payload: products }
 };
+
+
+export const clearOrder = () => {
+   return { type: CLEAR_ORDER };
+}
+
+export const deleteOrder = (id) => async (dispatch) => {
+   try {
+      await axios.delete(`${BASEURL}/order/${id}`, getHeaderToken());
+      toast.info(`Orden ${id} eliminada exitosamente`);
+      dispatch(getAllOrdersByUser());
+   } catch (error) {
+      console.log(error.response.data);
+      toast.error("No se ha podido eliminar el pedido");
+   }
+}

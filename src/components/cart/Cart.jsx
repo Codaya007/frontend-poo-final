@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { clearCart, delFromCart, loadOrder } from "../../data/actions";
+import { clearCart, setOrder } from "../../data/actions";
 import CartItem from "./Cart.item";
 
 const Cart = () => {
@@ -11,25 +11,39 @@ const Cart = () => {
   return (
     <div>
       <h2>Carrito de Compras</h2>
-      <article className="box">
-        {cart.map((item, index) => (
-          <CartItem
-            key={index}
-            data={item}
-            delOneFromCart={() => dispatch(delFromCart(item.id))}
-            delAllFromCart={() => dispatch(delFromCart(item.id, true))}
-          />
-        ))}
-        <button onClick={() => dispatch(clearCart())}>Vaciar Carrito</button>
-        <button
-          onClick={() => {
-            dispatch(loadOrder({ products: cart }));
-            navigate(`/order/envio`);
-          }}
-        >
-          Comprar
-        </button>
-      </article>
+      {cart.length ? (
+        <>
+          <table className="box">
+            <thead>
+              <tr>
+                <td>Producto</td>
+                <td>Precio Unitario</td>
+                <td>Cantidad</td>
+                <td>Acciones</td>
+              </tr>
+            </thead>
+            <tbody>
+              {cart.map((item, index) => (
+                <CartItem key={index} data={item} />
+              ))}
+            </tbody>
+          </table>
+          <nav>
+            <button onClick={() => dispatch(clearCart())}>
+              Vaciar Carrito
+            </button>
+            <button
+              onClick={() => {
+                navigate(`/order/envio`);
+              }}
+            >
+              Comprar
+            </button>
+          </nav>
+        </>
+      ) : (
+        <div>Aún no ha guardado productos en el carrito</div>
+      )}
     </div>
   );
 };

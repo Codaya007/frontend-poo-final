@@ -1,3 +1,4 @@
+import { getCartLocalStorage } from "../../helpers/cartLocalStorage";
 import {
    GET_ALL_PRODUCTS,
    SET_LOADING_PRODUCTS,
@@ -27,7 +28,7 @@ const initialState = {
    currentProducts: [],
    currentPage: 1,
    filtered: [],
-   cart: [],
+   cart: getCartLocalStorage(),
    options: {
       order: "asc",        // Puede ser: asc o desc
       orderBy: "name",     //Puede ser por: name, price
@@ -45,15 +46,15 @@ export default function reducer(state = initialState, action) {
       // CARRITO
       case ADD_TO_CART: {
          let newItem = state.products.find(
-            (product) => product.id === payload
+            (product) => product._id === payload
          );
-         let itemInCart = state.cart.find((item) => item.id === newItem.id);
+         let itemInCart = state.cart.find((item) => item._id === newItem._id);
 
          return itemInCart
             ? {
                ...state,
                cart: state.cart.map((item) =>
-                  item.id === newItem.id
+                  item._id === payload
                      ? { ...item, quantity: item.quantity + 1 }
                      : item
                ),
@@ -64,26 +65,26 @@ export default function reducer(state = initialState, action) {
             };
       }
       case REMOVE_ONE_FROM_CART: {
-         let itemToDelete = state.cart.find((item) => item.id === payload);
-
+         let itemToDelete = state.cart.find((item) => item._id === payload);
+         console.log(itemToDelete + " " + payload);
          return itemToDelete.quantity > 1
             ? {
                ...state,
                cart: state.cart.map((item) =>
-                  item.id === payload
+                  item._id === payload
                      ? { ...item, quantity: item.quantity - 1 }
                      : item
                ),
             }
             : {
                ...state,
-               cart: state.cart.filter((item) => item.id !== payload),
+               cart: state.cart.filter((item) => item._id !== payload),
             };
       }
       case REMOVE_ALL_FROM_CART: {
          return {
             ...state,
-            cart: state.cart.filter((item) => item.id !== payload),
+            cart: state.cart.filter((item) => item._id !== payload),
          };
       }
       case CLEAR_CART:

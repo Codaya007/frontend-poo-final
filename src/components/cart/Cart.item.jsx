@@ -1,18 +1,23 @@
-const CartItem = ({ data, delOneFromCart, delAllFromCart }) => {
-  let { id, name, price, quantity } = data;
+import { useDispatch } from "react-redux";
+import { addToCart, delFromCart } from "../../data/actions";
+
+const CartItem = ({ data }) => {
+  let { _id, name, price, quantity } = data;
+  const dispatch = useDispatch();
 
   return (
-    <div>
-      <h4>{name}</h4>
-      <h5>
-        ${price} {quantity} = ${price * quantity}
-      </h5>
-      <button onClick={() => delOneFromCart(id)}>Eliminar Uno</button>
-      <br />
-      <button onClick={() => delAllFromCart(id, true)}>Eliminar Todos</button>
-      <br />
-      <br />
-    </div>
+    <tr>
+      <td>{name}</td>
+      <td>${price}</td>
+      <td>
+        <button onClick={() => dispatch(delFromCart(_id, false))}>-</button>
+        {quantity}
+        <button onClick={() => dispatch(addToCart(_id))}>+</button>
+      </td>
+      <td>
+        <button onClick={() => dispatch(delFromCart(_id, true))}>Quitar</button>
+      </td>
+    </tr>
   );
 };
 

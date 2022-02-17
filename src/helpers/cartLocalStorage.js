@@ -1,9 +1,7 @@
 export const getCartLocalStorage = () => {
    try {
       const cart = localStorage.getItem('cart_poo');
-      return cart ? JSON.parse(cart) : {
-         products: []
-      };
+      return cart ? JSON.parse(cart) : [];
    } catch (err) {
       console.log(err);
    }

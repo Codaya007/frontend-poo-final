@@ -13,9 +13,19 @@ import 'react-toastify/dist/ReactToastify.css';
 import User from './screens/User';
 import OrderDetail from './components/orders/OrderDetail';
 import Cart from './components/cart/Cart';
-import OrderForm from './components/orders/order.form';
+import OrderForm from './components/orders/Order.form';
+import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { saveCartLocalStorage } from './helpers/cartLocalStorage';
+import PaymentForm from './components/orders/Payment.form';
 
 const AppRoutes = () => {
+   const cart = useSelector(state => state.products.cart);
+
+   useEffect(() => {
+      saveCartLocalStorage(cart);
+   }, [cart]);
+
    return (
       <div>
          <BrowserRouter>
@@ -31,6 +41,9 @@ const AppRoutes = () => {
                   <Route path='order'>
                      <Route path='envio' element={<OrderForm />} />
                      <Route path=':id' element={<OrderDetail />} />
+                  </Route>
+                  <Route path='payment'>
+                     <Route path=':orderId' element={<PaymentForm />} />
                   </Route>
                   <Route path='*' element={<Error404 />} />
                </Route>

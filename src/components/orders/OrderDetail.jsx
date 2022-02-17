@@ -1,8 +1,10 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { BASEURL } from "../../assets/constants";
+import { clearOrder } from "../../data/actions";
 import getHeaderToken from "../../helpers/getHeaderToken";
 import Loader from "../loader/Loader";
 
@@ -11,6 +13,8 @@ const OrderDetail = () => {
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
   const navigate = useNavigate();
+  const createdOrder = useSelector((state) => state.orders.createdOrder);
+  const dispatch = useDispatch();
 
   const {
     address,
@@ -42,10 +46,20 @@ const OrderDetail = () => {
     getOrder();
   }, [id]);
 
+  useEffect(() => {
+    createdOrder && dispatch(clearOrder());
+  }, [id, createdOrder, dispatch]);
+
   return loading ? (
     <Loader />
   ) : order ? (
     <div>
+      {paid && status === "PENDING" && (
+        <div>
+          Su pedido será enviado en las próximas 72 horas posteriores a la
+          compra.
+        </div>
+      )}
       <h2>Detalles del pedido</h2>
       <div>
         <div>
@@ -115,8 +129,12 @@ const OrderDetail = () => {
           </tr>
         </tbody>
       </table>
-      {paid && (
-        <button onClick={() => navigate(`/payment/${id}`)}>Pagar</button>
+      {!paid && (
+        <button
+          onClick={() => navigate(`/payment/${id}?amount=${totalAmount}`)}
+        >
+          Pagar
+        </button>
       )}
     </div>
   ) : (

@@ -22,7 +22,8 @@ const NavbarUser = ({ handlePage }) => {
 };
 
 const User = () => {
-  const [page, setPage] = useState("profile");
+  const [page, setPage] = useState("orders");
+
   return (
     <div>
       <NavbarUser handlePage={(page) => setPage(page)} />

@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { loadOrder } from "../../data/actions";
+import { createOrder } from "../../data/actions";
 import FormInput from "../inputs/input.component";
+import Loader from "../loader/Loader";
 
 const initialState = {
   country: "",
@@ -33,11 +34,13 @@ const validateForm = (form) => {
 };
 
 const OrderForm = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [form, setForm] = useState(initialState);
   const [errors, setErrors] = useState({});
-  const dispatch = useDispatch();
-  const currentOrder = useSelector((state) => state.orders.currentOrder);
-  const navigate = useNavigate();
+  const cart = useSelector((state) => state.products.cart);
+  const loadingOrder = useSelector((state) => state.orders.loadingOrders);
+  const createdOrder = useSelector((state) => state.orders.createdOrder);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -54,15 +57,29 @@ const OrderForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     const currentErrors = validateForm(form);
     setErrors(currentErrors);
 
     if (Object.keys(currentErrors).length) {
       toast.warn("El formulario contiene errores");
     } else {
-      dispatch(loadOrder(form));
+      const order = {
+        ...form,
+        products: cart.map((e) => ({
+          productId: e._id,
+          quantity: e.quantity,
+        })),
+      };
+      dispatch(createOrder(order));
     }
   };
+
+  useEffect(() => {
+    if (createdOrder) {
+      navigate(`/order/${createdOrder._id}`);
+    }
+  }, [loadingOrder, createdOrder, navigate]);
 
   return (
     <div>
@@ -104,10 +121,10 @@ const OrderForm = () => {
           handleChange={handleChange}
         />
         {errors.reference && <span>{errors.reference}</span>}
-        <input type="submit" value="Guardar datos" />
+        <button onClick={handleSubmit}>Guardar datos</button>
         <button onClick={handleCancelar}>Cancelar</button>
       </form>
-      <h2>Productos disponibles para compra</h2>
+      <h2>Productos a comprar</h2>
       <table>
         <thead>
           <tr>
@@ -119,11 +136,11 @@ const OrderForm = () => {
           </tr>
         </thead>
         <tbody>
-          {currentOrder.products.length &&
-            currentOrder.products.map((e) => {
+          {cart.length &&
+            cart.map((e) => {
               return (
-                <tr>
-                  <td>{e.id}</td>
+                <tr key={e._id}>
+                  <td>{e._id}</td>
                   <td>{e.name}</td>
                   <td>{e.quantity}</td>
                   <td>{e.price}</td>
@@ -133,6 +150,7 @@ const OrderForm = () => {
             })}
         </tbody>
       </table>
+      {loadingOrder && <Loader />}
     </div>
   );
 };
