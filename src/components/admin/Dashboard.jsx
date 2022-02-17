@@ -3,6 +3,7 @@ import ProductForm from './ProductForm';
 import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
 
+
 const Dashboard = () => {
     const productos = useSelector(state => state.products.products);
     const [products, setProducts] = useState(productos);
@@ -41,8 +42,8 @@ const Dashboard = () => {
                                         <button className='btn btn-danger ms-2' onClick={() => {
                                             setSelectedItem(products[index]);
                                             setEdit(true);
-                                        }} href="#Productos">
-                                            Editar
+                                            window.scrollTo(0, 0);
+                                        }}>Editar
                                         </button>
                                     </div>
                                 </div>
