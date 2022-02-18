@@ -1,11 +1,22 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { clearCart } from "../../data/actions";
 import CartItem from "./Cart.item";
 const Cart = () => {
   const cart = useSelector((state) => state.products.cart);
+  const isAuth = useSelector((state) => state.auth.isAuthenticated);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const handleComprar = () => {
+    if (isAuth) {
+      navigate(`/order/envio`);
+    } else {
+      toast.warning("Inicia sesión para poder comprar");
+      navigate("/login");
+    }
+  };
 
   return (
     <div className="d-flex flex-column justify-content-center">
@@ -35,12 +46,7 @@ const Cart = () => {
             >
               Vaciar Carrito
             </button>
-            <button
-              className="btn btn-primary"
-              onClick={() => {
-                navigate(`/order/envio`);
-              }}
-            >
+            <button className="btn btn-primary" onClick={handleComprar}>
               Comprar
             </button>
           </nav>
