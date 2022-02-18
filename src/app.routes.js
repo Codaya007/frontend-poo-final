@@ -19,6 +19,7 @@ import { useEffect } from 'react';
 import { saveCartLocalStorage } from './helpers/cartLocalStorage';
 import PaymentForm from './components/orders/Payment.form';
 import Dashboard from './components/admin/Dashboard';
+import Productdetail from './screens/ProductDetail';
 
 const AppRoutes = () => {
    const cart = useSelector(state => state.products.cart);
@@ -44,6 +45,9 @@ const AppRoutes = () => {
                         <Route path='order'>
                            <Route path='envio' element={<OrderForm />} />
                            <Route path=':id' element={<OrderDetail />} />
+                        </Route>
+                        <Route path='product'>
+                           <Route path=':id' element={<Productdetail />} />
                         </Route>
                         <Route path='payment'>
                            <Route path=':orderId' element={<PaymentForm />} />
