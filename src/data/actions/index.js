@@ -90,6 +90,8 @@ export const register = ({
       console.log(errors);
       if (errors) {
          errors.map(error => toast.error(error.msg))
+      } else {
+         toast.error("No se ha podido crear su cuenta");
       }
 
       dispatch({
@@ -120,6 +122,8 @@ export const login = (body) => async (dispatch) => {
          const errors = err.response.data.errors
          console.log(errors);
          errors.forEach(error => toast.error(error.msg))
+      } else {
+         toast.error("Usuario o contraseña incorrectos");
       }
 
       dispatch({

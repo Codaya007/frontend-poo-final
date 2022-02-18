@@ -29,10 +29,14 @@ const Cart = () => {
             </tbody>
           </table>
           <nav className="d-grid justify-content-center d-md-flex gap-3">
-            <button className="btn btn-secondary" onClick={() => dispatch(clearCart())}>
+            <button
+              className="btn btn-secondary"
+              onClick={() => dispatch(clearCart())}
+            >
               Vaciar Carrito
             </button>
-            <button className="btn btn-primary"
+            <button
+              className="btn btn-primary"
               onClick={() => {
                 navigate(`/order/envio`);
               }}
@@ -41,7 +45,7 @@ const Cart = () => {
             </button>
           </nav>
           <div className="mt-3 mb-3">
-            <span className="fw-bold h5">Precio Total: $  </span>
+            <span className="fw-bold h5">Precio Total: $ </span>
             {Math.round(
               cart.reduce((prev, e) => prev + e.price * e.quantity, 0) * 100
             ) / 100}
@@ -49,8 +53,12 @@ const Cart = () => {
         </div>
       ) : (
         <div>
-          <span className="text-light h3 mt-6 fst-italic">Aún no ha guardado productos en el carrito</span>
-          <span></span>
+          <span className="text-light h3 mt-6 fst-italic">
+            Aún no ha guardado productos en el carrito
+          </span>
+          <button className="btn btn-danger" onClick={() => navigate("/")}>
+            Empezar a agregar productos
+          </button>
         </div>
       )}
     </div>
