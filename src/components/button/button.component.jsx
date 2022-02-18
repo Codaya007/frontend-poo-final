@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
  */
 const Button = ({
   isButton = true,
+  isToLogin = true,
   title = "",
   action,
   href,
@@ -26,7 +27,13 @@ const Button = ({
           </button>
         </div>
       ) : (
-        <Link to={href}>{title}</Link>
+        !isToLogin ? (
+          <button className="btn btn-primary">
+            <Link to={href}><span className="text-light">{title}</span></Link>
+          </button>
+        ) : (
+          <Link to={href}>{title}</Link>
+        )
       )}
     </>
   );

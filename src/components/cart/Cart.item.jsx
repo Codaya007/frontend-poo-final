@@ -10,16 +10,16 @@ const CartItem = ({ data }) => {
       <td>
         <img style={{ width: "120px" }} src={photo} alt={name} />
       </td>
-      <td>{name}</td>
-      <td>${price}</td>
+      <td className="h5">{name}</td>
+      <td className="h5">${price}</td>
       <td>
-        <button onClick={() => dispatch(delFromCart(_id, false))}>-</button>
-        {quantity}
-        <button onClick={() => dispatch(addToCart(_id))}>+</button>
+        <button className="btn btn-danger" onClick={() => dispatch(delFromCart(_id, false))}>  -  </button>
+        <span className="align-middle h5">{"  " + quantity + "  "}</span>
+        <button className="btn btn-primary" onClick={() => dispatch(addToCart(_id))}> + </button>
       </td>
-      <td>${Math.round(price * quantity * 100) / 100}</td>
+      <td className="h5">${Math.round(price * quantity * 100) / 100}</td>
       <td>
-        <button onClick={() => dispatch(delFromCart(_id, true))}>Quitar</button>
+        <button className="btn btn-danger" onClick={() => dispatch(delFromCart(_id, true))}>Quitar</button>
       </td>
     </tr>
   );

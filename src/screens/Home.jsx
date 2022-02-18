@@ -8,7 +8,7 @@ const Home = () => {
   // console.log(products);
   return (
     <div>
-      <h1>Home</h1>
+      <h1 className="text-light fw-bold fst-italic">Home</h1>
       {products.length ? (
         <div className="row">
           {products.map((product) => (

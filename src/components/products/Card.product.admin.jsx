@@ -9,7 +9,7 @@ const CardProductAdmin = ({ product }) => {
     <div className="col-md-4" key={product._id}>
       <div className="card mt-4">
         <div className="card-header">
-          <h3>{product.name}</h3>
+          <h4>{product.name}</h4>
           <span className="badge rounded-pill bg-success">{product.price}</span>
         </div>
         <div className="card-body">

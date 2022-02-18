@@ -7,7 +7,7 @@ export const Profiles = () => {
         <div className='container dashboard-Admin'>
             <div className='bg-light mt-5 pt-2 rounded'>
                 <span className='h4'>Admin</span>
-                <table className="table table-striped table-hover table-bordered mb-5">
+                <table className="table table-striped table-hover table-bordered mb-5 align-middle">
                     <thead>
                         <tr className='table-light'>
                             <th>#</th>

@@ -16,7 +16,7 @@ export const Sales = () => {
         <div className='container-fluid'>
             <img src={logo} className="App-logo" alt="logo" />
             <div className='bg-light mt-5 pt-2 rounded'>
-                <span className='h4'>Ventas</span>
+                <span className='h4 text-light fst-italic'>Ventas</span>
                 <table className="table table-striped table-bordered mb-5">
                     <thead className='table-light'>
                         <tr>
@@ -42,7 +42,7 @@ export const Sales = () => {
                                                 </h2>
                                                 <div id={"flush-collapse-" + sale.id} className="accordion-collapse collapse" aria-labelledby="flush-heading" data-bs-parent="#accordionFlushExample">
                                                     <div className="accordion-body">
-                                                        <table className="table table-striped table-hover table-bordered mb-5">
+                                                        <table className="table table-striped table-hover table-bordered mb-5 align-middle">
                                                             <thead>
                                                                 <tr className='table-light'>
                                                                     <th>#</th>

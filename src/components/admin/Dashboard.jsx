@@ -7,7 +7,7 @@ const Dashboard = () => {
   const products = useSelector((state) => state.products.products);
 
   return (
-    <div className="dashboard-Admin">
+    <div className="dashboard-Admin mt-5">
       <div className="content-Dashboard">
         <div className="container-fluid">
           {/* EDITOR FORM */}

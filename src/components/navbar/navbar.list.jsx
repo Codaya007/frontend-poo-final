@@ -59,20 +59,20 @@ const NavbarList = () => {
         </>
       )}
       {!isAuth && (
-        <>
+        <div className="d-grid gap-2 d-md-flex justify-content-md-end">
           <Button
             title="Login"
-            moreStyle="hover:text-primary"
-            isButton={false}
             href="/login"
+            isButton={false}
+            isToLogin={false}
           />
           <Button
             title="Registrarse"
-            moreStyle="hover:text-primary"
-            isButton={false}
             href="/register"
+            isButton={false}
+            isToLogin={false}
           />
-        </>
+        </div>
       )}
     </Nav>
   );
