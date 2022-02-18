@@ -66,7 +66,7 @@ export default function reducer(state = initialState, action) {
       }
       case REMOVE_ONE_FROM_CART: {
          let itemToDelete = state.cart.find((item) => item._id === payload);
-         console.log(itemToDelete + " " + payload);
+         // console.log(itemToDelete + " " + payload);
          return itemToDelete.quantity > 1
             ? {
                ...state,

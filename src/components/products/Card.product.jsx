@@ -20,7 +20,7 @@ const CardProduct = ({ product }) => {
 
   return (
     <div>
-      <img src={photo} alt={name} />
+      <img style={{ width: "100px" }} src={photo} alt={name} />
       <div>
         <h3>{name}</h3>
         <h2>{price}</h2>

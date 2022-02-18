@@ -149,7 +149,7 @@ export const getAllProducts = () => async (dispatch) => {
    // Realizo la petición a la API
    try {
       const res = await axios.get(URL_GET_ALL_PRODUCTS);
-      console.log(res.data);
+      // console.log(res.data);
 
       dispatch({
          type: GET_ALL_PRODUCTS,

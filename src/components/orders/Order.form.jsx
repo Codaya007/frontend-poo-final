@@ -125,31 +125,33 @@ const OrderForm = () => {
         <button onClick={handleCancelar}>Cancelar</button>
       </form>
       <h2>Productos a comprar</h2>
-      <table>
-        <thead>
-          <tr>
-            <td>ID</td>
-            <td>Detalle</td>
-            <td>Cantidad</td>
-            <td>Precio Unitario</td>
-            <td>Subtotal</td>
-          </tr>
-        </thead>
-        <tbody>
-          {cart.length &&
-            cart.map((e) => {
-              return (
-                <tr key={e._id}>
-                  <td>{e._id}</td>
-                  <td>{e.name}</td>
-                  <td>{e.quantity}</td>
-                  <td>{e.price}</td>
-                  <td>{e.price * e.quantity}</td>
-                </tr>
-              );
-            })}
-        </tbody>
-      </table>
+      {cart.length && (
+        <table>
+          <thead>
+            <tr>
+              <td>ID</td>
+              <td>Detalle</td>
+              <td>Cantidad</td>
+              <td>Precio Unitario</td>
+              <td>Subtotal</td>
+            </tr>
+          </thead>
+          <tbody>
+            {cart.length &&
+              cart.map((e) => {
+                return (
+                  <tr key={e._id}>
+                    <td>{e._id}</td>
+                    <td>{e.name}</td>
+                    <td>{e.quantity}</td>
+                    <td>{e.price}</td>
+                    <td>{e.price * e.quantity}</td>
+                  </tr>
+                );
+              })}
+          </tbody>
+        </table>
+      )}
       {loadingOrder && <Loader />}
     </div>
   );

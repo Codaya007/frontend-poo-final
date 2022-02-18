@@ -16,9 +16,10 @@ const Cart = () => {
           <table className="box">
             <thead>
               <tr>
-                <td>Producto</td>
+                <td colSpan={"2"}>Producto</td>
                 <td>Precio Unitario</td>
                 <td>Cantidad</td>
+                <td>Subtotal</td>
                 <td>Acciones</td>
               </tr>
             </thead>
@@ -40,6 +41,12 @@ const Cart = () => {
               Comprar
             </button>
           </nav>
+          <div>
+            Precio Total: $
+            {Math.round(
+              cart.reduce((prev, e) => prev + e.price * e.quantity, 0) * 100
+            ) / 100}
+          </div>
         </>
       ) : (
         <div>Aún no ha guardado productos en el carrito</div>

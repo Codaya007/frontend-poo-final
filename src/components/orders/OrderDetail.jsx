@@ -77,7 +77,7 @@ const OrderDetail = () => {
         {paid && (
           <div>
             <h4>Entrega</h4>
-            <p>{status}</p>
+            <p>{status === "PENDING" ? "Pendiente" : "Entregada"}</p>
           </div>
         )}
       </div>
@@ -119,7 +119,7 @@ const OrderDetail = () => {
                 <td>{prod.name}</td>
                 <td>{prod.price}</td>
                 <td>{prod.quantity}</td>
-                <td>{prod.quantity * prod.price}</td>
+                <td>{Math.round(prod.quantity * prod.price * 100) / 100}</td>
               </tr>
             );
           })}
