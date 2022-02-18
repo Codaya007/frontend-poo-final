@@ -43,34 +43,56 @@ const Productdetail = () => {
   return loading ? (
     <Loader />
   ) : product ? (
-    <div>
-      <h2>{name}</h2>
-      <img src={photo} alt={name} />
-      <div>
-        <h3>Descripción</h3>
-        <p>{description}</p>
+    <div className="container container-detail card align-middle rounded-15 bg-light">
+      <div className="row">
+        <div className="col-md-auto div-img">
+          <img src={photo} alt={name} />
+        </div>
+        <div className="col d-flex">
+          <table className="table table-striped table-bordered rounded-15 align-middle mt-3">
+            <thead>
+              <tr>
+                <td colSpan={2}>
+                  <h2>{name}</h2>
+                </td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="h3">Descripción:</td>
+                <td className="p">{description}</td>
+              </tr>
+              <tr>
+                <td className="h3">Precio:</td>
+                <td className="h5">{price}</td>
+              </tr>
+              <tr>
+                <td className="h3">Categoría:</td>
+                <td className="h5">{category.name}</td>
+              </tr>
+              <tr>
+                <td className="h3">Cantidad:</td>
+                <td className="h5">{quantity}</td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colSpan={2}>
+                  {quantity > 0 ? (
+                    inCart ? (
+                      <button className="btn btn-primary" onClick={handleRemoveFromCart}>Quitar del carrito</button>
+                    ) : (
+                      <button className="btn btn-primary" onClick={handleAddCart}>Añadir al carrito</button>
+                    )
+                  ) : (
+                    <button>Producto agotado</button>
+                  )}
+                </td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
       </div>
-      <div>
-        <h3>Precio</h3>
-        <p>{price}</p>
-      </div>
-      <div>
-        <h3>Categoría</h3>
-        <p>{category.name}</p>
-      </div>
-      <div>
-        <h3>Cantidad</h3>
-        <p>{quantity}</p>
-      </div>
-      {quantity > 0 ? (
-        inCart ? (
-          <button onClick={handleRemoveFromCart}>Quitar del carrito</button>
-        ) : (
-          <button onClick={handleAddCart}>Añadir al carrito</button>
-        )
-      ) : (
-        <button>Producto agotado</button>
-      )}
     </div>
   ) : (
     <div>

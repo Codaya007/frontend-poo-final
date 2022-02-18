@@ -59,7 +59,7 @@ const NavbarList = () => {
         </>
       )}
       {!isAuth && (
-        <div className="d-grid gap-2 d-md-flex justify-content-md-end">
+        <div className="d-flex gap-3">
           <Button
             title="Login"
             href="/login"

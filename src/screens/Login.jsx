@@ -59,9 +59,9 @@ const Login = () => {
   return (
     <Container>
       <div className="container-login">
-        <div className="row bg-light rounded-15">
-          <div className="col">
-            <img src={logo} alt=" " />
+        <div className="row bg-light grid-login rounded-15">
+          <div className="col img-login">
+            <img src={logo} alt=" " className="img_login" />
           </div>
           <div className="col p-5">
             <form className="" onSubmit={onSubmit}>

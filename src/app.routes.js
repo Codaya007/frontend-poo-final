@@ -33,33 +33,29 @@ const AppRoutes = () => {
          <BrowserRouter>
             <ToastContainer />
             <HeaderNavbar />
-            <div className="dashboard-Admin">
-               <div className="content-Dashboard">
-                  <Routes>
-                     <Route path='/'>
-                        <Route index element={<Home />} />
-                        <Route path='register' element={<Register />} />
-                        <Route path='login' element={<Login />} />
-                        <Route path='user' element={<User />} />
-                        <Route path='cart' element={<Cart />} />
-                        <Route path='order'>
-                           <Route path='envio' element={<OrderForm />} />
-                           <Route path=':id' element={<OrderDetail />} />
-                        </Route>
-                        <Route path='product'>
-                           <Route path=':id' element={<Productdetail />} />
-                        </Route>
-                        <Route path='payment'>
-                           <Route path=':orderId' element={<PaymentForm />} />
-                        </Route>
-                        <Route path='dashboard'>
-                           <Route path='admin' element={<Dashboard />} />
-                        </Route>
-                        <Route path='*' element={<Error404 />} />
-                     </Route>
-                  </Routes>
-               </div>
-            </div>
+            <Routes>
+               <Route path='/'>
+                  <Route index element={<Home />} />
+                  <Route path='register' element={<Register />} />
+                  <Route path='login' element={<Login />} />
+                  <Route path='user' element={<User />} />
+                  <Route path='cart' element={<Cart />} />
+                  <Route path='order'>
+                     <Route path='envio' element={<OrderForm />} />
+                     <Route path=':id' element={<OrderDetail />} />
+                  </Route>
+                  <Route path='product'>
+                     <Route path=':id' element={<Productdetail />} />
+                  </Route>
+                  <Route path='payment'>
+                     <Route path=':orderId' element={<PaymentForm />} />
+                  </Route>
+                  <Route path='dashboard'>
+                     <Route path='admin' element={<Dashboard />} />
+                  </Route>
+                  <Route path='*' element={<Error404 />} />
+               </Route>
+            </Routes>
          </BrowserRouter>
       </div>
    );
