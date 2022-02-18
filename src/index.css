@@ -41,15 +41,6 @@ body{
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
-/*header {
-  position: fixed;
-  z-index: 1000;
-  width: 100%;
-}*/
-.content-Dashboard {
-  margin: 0 100px 0 100px;
-}
-
 .imagen {
   width: 200px;
   height: 200px;

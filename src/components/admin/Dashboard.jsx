@@ -7,20 +7,18 @@ const Dashboard = () => {
   const products = useSelector((state) => state.products.products);
 
   return (
-    <div className="dashboard-Admin mt-5">
-      <div className="content-Dashboard">
-        <div className="container-fluid">
-          {/* EDITOR FORM */}
-          <ProductForm />
-          <div className="row">
-            {products.length ? (
-              products.map((product) => (
-                <CardProductAdmin key={product._id} product={product} />
-              ))
-            ) : (
-              <div>No hay productos</div>
-            )}
-          </div>
+    <div className="dashboard-Admin p-5 container-fluid">
+      <div className="container-fluid">
+        {/* EDITOR FORM */}
+        <ProductForm />
+        <div className="row">
+          {products.length ? (
+            products.map((product) => (
+              <CardProductAdmin key={product._id} product={product} />
+            ))
+          ) : (
+            <div>No hay productos</div>
+          )}
         </div>
       </div>
     </div>
