@@ -29,7 +29,8 @@ import {
    REMOVE_ONE_FROM_CART,
    CREATE_ORDER,
    CLEAR_ORDER,
-   GET_ALL_CATEGORIES
+   GET_ALL_CATEGORIES,
+   SET_PRODUCT_TO_EDIT
 } from './types';
 
 
@@ -253,3 +254,49 @@ export const getAllCategories = () => async (dispatch) => {
       toast.warning("No se han podido cargar las categorìas");
    }
 }
+
+export const deleteProduct = (id) => async (dispatch) => {
+   try {
+      await axios.delete(`${BASEURL}/product/${id}`, getHeaderToken());
+      toast.info(`Producto ${id} eliminado`);
+      dispatch(getAllProducts());
+   } catch (error) {
+      console.log(error.response.data);
+      toast.error("No se ha podido eliminar el producto");
+   }
+}
+
+
+export const updateProduct = (product) => async (dispatch) => {
+   try {
+      await axios.put(
+         `${BASEURL}/product/${product._id}`,
+         product,
+         getHeaderToken()
+      );
+      toast.success(`Producto '${product.name}' actualizado`);
+      dispatch(getAllProducts());
+   } catch (error) {
+      console.log(error.response.data);
+      toast.error("No se ha podido actualizar el producto");
+   }
+}
+
+
+export const createProduct = (product) => async (dispatch) => {
+   try {
+      await axios.post(
+         `${BASEURL}/product`,
+         product,
+         getHeaderToken()
+      );
+      toast.success(`Producto creado`);
+      dispatch(getAllProducts());
+   } catch (error) {
+      console.log(error.response.data);
+      toast.error("No se ha podido crear el producto");
+   }
+}
+
+
+export const setProductToEdit = (product) => ({ type: SET_PRODUCT_TO_EDIT, payload: product })

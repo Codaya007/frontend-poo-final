@@ -4,6 +4,7 @@ import Button from "../button/button.component";
 import NavItem from "./navbar.item";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../data/actions";
+import { Nav } from "react-bootstrap";
 
 const NavbarList = () => {
   const dispatch = useDispatch();
@@ -29,9 +30,9 @@ const NavbarList = () => {
   };
 
   return (
-    <ul className="list-navbar">
+    <Nav className="me-auto">
       <NavItem link="/" name="Home" listStyle={isActive(location, "/")} />
-      {isAuth && user && user.rol === 1 && (
+      {isAuth && user && user.role === 1 && (
         <NavItem
           link="/dashboard/admin"
           name="Dashboard"
@@ -73,7 +74,7 @@ const NavbarList = () => {
           />
         </>
       )}
-    </ul>
+    </Nav>
   );
 };
 

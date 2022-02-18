@@ -1,30 +1,28 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Container from "../container/container.component";
+// import Container from "../container/container.component";
 import NavbarList from "./navbar.list";
+import { Navbar, Container } from "react-bootstrap";
 
-const Navbar = () => {
+const HeaderNavbar = () => {
   return (
-    <Container>
-      <nav className="navbar">
-        {/* Left navbar Side */}
-        <div>
-          <Link to="/">
-            <img
-              className="logo"
-              src={require("../../assets/logo.png")}
-              alt="Main Logo"
-            />
-          </Link>
-        </div>
-
-        {/* Right navbar Side */}
-        <div>
+    <header>
+      <Navbar bg="dark" variant="dark">
+        <Container>
+          <Navbar.Brand>
+            <Link to="/">
+              <img
+                className="logo"
+                src={require("../../assets/logo.png")}
+                alt="Main Logo"
+              />
+            </Link>
+          </Navbar.Brand>
           <NavbarList />
-        </div>
-      </nav>
-    </Container>
+        </Container>
+      </Navbar>
+    </header>
   );
 };
 
-export default Navbar;
+export default HeaderNavbar;

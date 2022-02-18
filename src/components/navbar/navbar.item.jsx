@@ -1,13 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
-const NavItem = ({ link, icon, listStyle, name }) => {
+import { Nav } from "react-bootstrap";
+
+const NavItem = ({ link, listStyle, name }) => {
   return (
-    <li className="item-navbar">
-      <Link to={link}>
-        {icon && <span>{icon}</span>}
-        <span style={listStyle}>{name}</span>
-      </Link>
-    </li>
+    <Nav.Link as={Link} to={link}>
+      <span style={listStyle}>{name}</span>
+    </Nav.Link>
   );
 };
 

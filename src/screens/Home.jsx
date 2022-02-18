@@ -5,7 +5,7 @@ import CardProduct from "../components/products/Card.product";
 const Home = () => {
   const products = useSelector((state) => state.products.products);
 
-  console.log(products);
+  // console.log(products);
   return (
     <div>
       <h1>Home</h1>

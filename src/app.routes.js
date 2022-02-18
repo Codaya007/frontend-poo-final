@@ -2,7 +2,7 @@ import React from 'react';
 // router
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 // Components
-import Navbar from './components/navbar/navbar.component';
+import HeaderNavbar from './components/navbar/navbar.component';
 import Register from './screens/Register';
 import Home from './screens/Home';
 import Error404 from './screens/Error404';
@@ -31,27 +31,31 @@ const AppRoutes = () => {
       <div>
          <BrowserRouter>
             <ToastContainer />
-            <Navbar />
-            <Routes>
-               <Route path='/'>
-                  <Route index element={<Home />} />
-                  <Route path='register' element={<Register />} />
-                  <Route path='login' element={<Login />} />
-                  <Route path='user' element={<User />} />
-                  <Route path='cart' element={<Cart />} />
-                  <Route path='order'>
-                     <Route path='envio' element={<OrderForm />} />
-                     <Route path=':id' element={<OrderDetail />} />
-                  </Route>
-                  <Route path='payment'>
-                     <Route path=':orderId' element={<PaymentForm />} />
-                  </Route>
-                  <Route path='dashboard'>
-                     <Route path='admin' element={<Dashboard />} />
-                  </Route>
-                  <Route path='*' element={<Error404 />} />
-               </Route>
-            </Routes>
+            <HeaderNavbar />
+            <div className="dashboard-Admin">
+               <div className="content-Dashboard">
+                  <Routes>
+                     <Route path='/'>
+                        <Route index element={<Home />} />
+                        <Route path='register' element={<Register />} />
+                        <Route path='login' element={<Login />} />
+                        <Route path='user' element={<User />} />
+                        <Route path='cart' element={<Cart />} />
+                        <Route path='order'>
+                           <Route path='envio' element={<OrderForm />} />
+                           <Route path=':id' element={<OrderDetail />} />
+                        </Route>
+                        <Route path='payment'>
+                           <Route path=':orderId' element={<PaymentForm />} />
+                        </Route>
+                        <Route path='dashboard'>
+                           <Route path='admin' element={<Dashboard />} />
+                        </Route>
+                        <Route path='*' element={<Error404 />} />
+                     </Route>
+                  </Routes>
+               </div>
+            </div>
          </BrowserRouter>
       </div>
    );

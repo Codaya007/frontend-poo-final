@@ -16,6 +16,7 @@ import {
    CLEAR_CART,
    REMOVE_ALL_FROM_CART,
    REMOVE_ONE_FROM_CART,
+   SET_PRODUCT_TO_EDIT,
 } from "../actions/types";
 // import { toast } from "react-toastify";
 
@@ -28,6 +29,7 @@ const initialState = {
    currentProducts: [],
    currentPage: 1,
    filtered: [],
+   productToEdit: null,
    cart: getCartLocalStorage(),
    options: {
       order: "asc",        // Puede ser: asc o desc
@@ -90,6 +92,8 @@ export default function reducer(state = initialState, action) {
       case CLEAR_CART:
          return { ...state, cart: [] };
       // PRODUCTOS
+      case SET_PRODUCT_TO_EDIT:
+         return { ...state, productToEdit: payload };
       case SET_PAGE:
          return {
             ...state,
