@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { clearCart, setOrder } from "../../data/actions";
+import { clearCart } from "../../data/actions";
 import CartItem from "./Cart.item";
 
 const Cart = () => {

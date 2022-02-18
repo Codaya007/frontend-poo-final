@@ -1,11 +1,11 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { BASEURL } from "../assets/constants";
 import Loader from "../components/loader/Loader";
-import { addToCart } from "../data/actions";
+import { addToCart, delFromCart } from "../data/actions";
 
 const Productdetail = () => {
   const [product, setProduct] = useState(null);
@@ -13,6 +13,18 @@ const Productdetail = () => {
   const { id } = useParams();
   const { name, description, price, category, quantity, photo } = product || {};
   const dispatch = useDispatch();
+  const cart = useSelector((state) => state.products.cart);
+  const [inCart, setInCart] = useState(cart.find((e) => e._id === id));
+
+  const handleAddCart = (e) => {
+    dispatch(addToCart(id));
+    setInCart(true);
+  };
+
+  const handleRemoveFromCart = (e) => {
+    dispatch(delFromCart(id, true));
+    setInCart(false);
+  };
 
   useEffect(() => {
     const getProduct = async () => {
@@ -44,14 +56,20 @@ const Productdetail = () => {
       </div>
       <div>
         <h3>Categoría</h3>
-        <p>{category}</p>
+        <p>{category.name}</p>
       </div>
       <div>
         <h3>Cantidad</h3>
         <p>{quantity}</p>
       </div>
-      {quantity > 0 && (
-        <button onClick={dispatch(addToCart(id))}>Añadir al carrito</button>
+      {quantity > 0 ? (
+        inCart ? (
+          <button onClick={handleRemoveFromCart}>Quitar del carrito</button>
+        ) : (
+          <button onClick={handleAddCart}>Añadir al carrito</button>
+        )
+      ) : (
+        <button>Producto agotado</button>
       )}
     </div>
   ) : (
