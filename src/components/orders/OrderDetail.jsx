@@ -112,17 +112,25 @@ const OrderDetail = () => {
           </tr>
         </thead>
         <tbody>
-          {products.map((prod) => {
-            return (
-              <tr key={prod._id}>
-                <td>{prod._id}</td>
-                <td>{prod.name}</td>
-                <td>{prod.price}</td>
-                <td>{prod.quantity}</td>
-                <td>{Math.round(prod.quantity * prod.price * 100) / 100}</td>
-              </tr>
-            );
-          })}
+          {products.lenght > 1 ? (
+            products.map((prod) => {
+              return (
+                <tr key={prod._id}>
+                  <td>{prod._id}</td>
+                  <td>{prod.name}</td>
+                  <td>{prod.price}</td>
+                  <td>{prod.quantity}</td>
+                  <td>{Math.round(prod.quantity * prod.price * 100) / 100}</td>
+                </tr>
+              );
+            })
+          ) : (
+            <tr>
+              <td colSpan={"5"}>
+                Es posible que sus productos hayan sido eliminados
+              </td>
+            </tr>
+          )}
           <tr>
             <td colSpan={"4"}>Total</td>
             <td>${totalAmount}</td>
