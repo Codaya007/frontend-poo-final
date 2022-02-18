@@ -20,9 +20,11 @@ const Button = ({
   return (
     <>
       {isButton ? (
-        <button type={type} onClick={action}>
-          {title}
-        </button>
+        <div className="d-grid mt-4 mb-4">
+          <button className="btn btn-primary" type={type} onClick={action}>
+            {title}
+          </button>
+        </div>
       ) : (
         <Link to={href}>{title}</Link>
       )}

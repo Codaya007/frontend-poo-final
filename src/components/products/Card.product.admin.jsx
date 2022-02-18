@@ -10,7 +10,7 @@ const CardProductAdmin = ({ product }) => {
       <div className="card mt-4">
         <div className="card-header">
           <h3>{product.name}</h3>
-          <span className="badge rounded-pill bg-danger">{product.price}</span>
+          <span className="badge rounded-pill bg-success">{product.price}</span>
         </div>
         <div className="card-body">
           <p>
@@ -29,7 +29,7 @@ const CardProductAdmin = ({ product }) => {
             Eliminar
           </button>
           <button
-            className="btn btn-danger ms-2"
+            className="btn btn-primary ms-2"
             onClick={() => {
               dispatch(setProductToEdit(product));
               window.scrollTo(0, 0);

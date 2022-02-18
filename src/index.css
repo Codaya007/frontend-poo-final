@@ -3,7 +3,22 @@
   height: 50px;
   border-radius: 50%;
 }
-.dashboard-Admin {
+
+.mt-80{
+  margin-top: 80px;
+}
+
+.rounded-15{
+  border-radius: 15px;
+}
+
+.container-login{
+  height: calc(100%-70px);
+  padding: 0 50px 0 50px;
+  margin-top: 170px;
+}
+
+body{
   text-align: center;
   background: #2980b9; /* fallback for old browsers */
   background: -webkit-linear-gradient(
@@ -18,11 +33,11 @@
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
-header {
+/*header {
   position: fixed;
   z-index: 1000;
   width: 100%;
-}
+}*/
 .content-Dashboard {
   margin: 0 100px 0 100px;
 }

@@ -6,6 +6,7 @@ import Container from "../components/container/container.component";
 import FormInput from "../components/inputs/input.component";
 import { login } from "../data/actions";
 import Loader from "../components/loader/Loader";
+import logo from "../assets/logo.png";
 const initialState = {
   email: "",
   password: "",
@@ -57,44 +58,59 @@ const Login = () => {
 
   return (
     <Container>
-      <form className="register-form" onSubmit={onSubmit}>
-        <h2 className="register-form-title">Login</h2>
-        <FormInput
-          title="Email"
-          placeholder="alguien@example.com"
-          name="email"
-          value={email}
-          handleChange={handleChange}
-          type="email"
-        />
-        {errors.email && <span>{errors.email}</span>}
-        <FormInput
-          title="Password"
-          placeholder="*********"
-          name="password"
-          value={password}
-          handleChange={handleChange}
-          type="password"
-        />
-        {errors.password && <span>{errors.password}</span>}
-        {isLoading && <Loader />}
-        {!isLoading && (
-          <Button
-            title="Ingresar"
-            moreStyle="bg-primary text-white w-full mb-3"
-            type="submit"
-          />
-        )}
+      <div className="container-login">
+        <div className="row bg-light rounded-15">
+          <div className="col">
+            <img src={logo} alt=" " />
+          </div>
+          <div className="col p-5">
+            <form className="" onSubmit={onSubmit}>
+              <h2 className="form-label">Login</h2>
+              <FormInput
+                title="Email"
+                placeholder="alguien@example.com"
+                name="email"
+                value={email}
+                handleChange={handleChange}
+                type="email"
+                moreClass={["h5", "mb-4"]}
+              />
+              {errors.email && <span className="badge bg-danger">{errors.email}</span>}
+              <FormInput
+                title="Password"
+                placeholder="*********"
+                name="password"
+                value={password}
+                handleChange={handleChange}
+                type="password"
+                moreClass={["h5", "mb-4"]}
+              />
+              {errors.password && <span className="badge bg-danger">{errors.password}</span>}
+              <div className="text-start form-check">
+                <input type="checkbox" name="connected" id="" className="form-check-input" />
+                <label htmlFor="connectec" className="form-check-label">Mantenerse conectado</label>
+              </div>
+              {isLoading && <Loader />}
+              {!isLoading && (
+                <Button
+                  title="Ingresar"
+                  moreStyle="btn bg-primary text-white w-full mb-3"
+                  type="submit"
+                />
+              )}
 
-        <div>
-          <Button
-            isButton={false}
-            title="Aún no tienes una cuenta? Registrar"
-            href="/register"
-            moreStyle="text-gray-600"
-          />
+              <div>
+                <Button
+                  isButton={false}
+                  title="Aún no tienes una cuenta? Registrar"
+                  href="/register"
+                  moreStyle="text-gray-600"
+                />
+              </div>
+            </form>
+          </div>
         </div>
-      </form>
+      </div>
     </Container>
   );
 };
