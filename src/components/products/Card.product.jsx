@@ -19,17 +19,45 @@ const CardProduct = ({ product }) => {
   };
 
   return (
-    <div>
-      <img style={{ width: "100px" }} src={photo} alt={name} />
-      <div>
-        <h3>{name}</h3>
-        <h2>{price}</h2>
-        <h2>Productos vendidos: {sold}</h2>
+    <div className="col-md-3" key={product._id}>
+      <div className="card mt-4 mb-4 ms-3 me-3 rounded-15">
+        <div className="card-header">
+          <h3>{product.name}</h3>
+          <span className="badge rounded-15 bg-success">{product.price}</span>
+        </div>
+        <div className="card-body">
+          <img className="img-fluid imagen" src={product.photo} alt="" />
+          <div className="dropend b-grid">
+            <button className="btn btn-info dropdown-toggle" type="button" id={"dropdownMenu" + product._id} data-bs-toggle="dropdown" aria-expanded="false">
+              Descripcion
+            </button>
+            <ul className="dropdown-menu bg-secondary" aria-labelledby={"dropdownMenu" + product._id}>
+              <p className="ps-2 pe-2 text-light text-justify">{product.description}</p>
+            </ul>
+          </div>
+        </div>
+        <div className="card-footer">
+          <button className="btn btn-primary" onClick={inCart ? handleRemoveFromCart : handleAddCart}>
+            {inCart ? "Quitar del carrito" : "Añadir al carrito"}
+          </button>
+        </div>
       </div>
-      <button onClick={inCart ? handleRemoveFromCart : handleAddCart}>
-        {inCart ? "Quitar del carrito" : "Añadir al carrito"}
-      </button>
-    </div>
+    </div >
+
+    // <div class="col">
+    //   <div className="card">
+    //     <img style={{ width: "100px" }} src={photo} alt={name} />
+    //     <div>
+    //       <h3>{name}</h3>
+    //       <h2>{price}</h2>
+    //       <h2>Productos vendidos: {sold}</h2>
+    //     </div>
+    //     <button onClick={inCart ? handleRemoveFromCart : handleAddCart}>
+    //       {inCart ? "Quitar del carrito" : "Añadir al carrito"}
+    //     </button>
+    //   </div>
+    // </div>
+
   );
 };
 

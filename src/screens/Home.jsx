@@ -10,7 +10,7 @@ const Home = () => {
     <div>
       <h1>Home</h1>
       {products.length ? (
-        <div>
+        <div className="row">
           {products.map((product) => (
             <CardProduct key={product._id} product={product} />
           ))}
