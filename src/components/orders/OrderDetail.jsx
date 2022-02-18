@@ -22,7 +22,7 @@ const OrderDetail = () => {
     country,
     createdAt,
     paid,
-    products,
+    products = [],
     reference,
     status,
     totalAmount,
@@ -112,7 +112,7 @@ const OrderDetail = () => {
           </tr>
         </thead>
         <tbody>
-          {products.lenght > 1 ? (
+          {products.length ? (
             products.map((prod) => {
               return (
                 <tr key={prod._id}>
@@ -127,7 +127,7 @@ const OrderDetail = () => {
           ) : (
             <tr>
               <td colSpan={"5"}>
-                Es posible que sus productos hayan sido eliminados
+                Es posible que sus productos se hayan eliminado
               </td>
             </tr>
           )}
