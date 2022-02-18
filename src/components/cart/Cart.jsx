@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { clearCart } from "../../data/actions";
 import CartItem from "./Cart.item";
+import { FaCartPlus } from 'react-icons/fa';
+
 const Cart = () => {
   const cart = useSelector((state) => state.products.cart);
   const isAuth = useSelector((state) => state.auth.isAuthenticated);
@@ -61,9 +63,12 @@ const Cart = () => {
         <div>
           <span className="text-light h3 mt-6 fst-italic">
             Aún no ha guardado productos en el carrito
-          </span>
-          <button className="btn btn-danger" onClick={() => navigate("/")}>
-            Empezar a agregar productos
+          </span><br />
+          <button className="btn btn-success addCart pb-4 pe-3 ps-3 rounded-15" onClick={() => navigate("/")}>
+            <div>
+              <FaCartPlus /><br />
+              <h3>Añadir un nuevo producto</h3>
+            </div>
           </button>
         </div>
       )}
