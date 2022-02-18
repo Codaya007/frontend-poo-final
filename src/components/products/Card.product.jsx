@@ -23,10 +23,8 @@ const CardProduct = ({ product }) => {
     <div className="col-md-3" key={product._id}>
       <div className="card mt-4 mb-4 ms-3 me-3 rounded-15">
         <div className="card-header">
-          <h5>{product.name}</h5>
-          <span className="badge rounded-15 bg-success">{product.price}</span>
           <Link style={{ textDecoration: "none" }} to={`/product/${_id}`}>
-            <h3>{name}</h3>
+            <h5>{name}</h5>
           </Link>
           <span className="badge rounded-15 bg-success">{price}</span>
         </div>
@@ -59,7 +57,7 @@ const CardProduct = ({ product }) => {
           </button>
         </div>
       </div>
-    </div >
+    </div>
   );
 };
 
