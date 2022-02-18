@@ -20,7 +20,7 @@ const Button = ({
   return (
     <>
       {isButton ? (
-        <div className="d-grid mt-4 mb-4">
+        <div className={"d-grid " + moreStyle}>
           <button className="btn btn-primary" type={type} onClick={action}>
             {title}
           </button>

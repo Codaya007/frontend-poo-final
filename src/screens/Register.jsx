@@ -111,6 +111,7 @@ const Register = ({ isAuth, isLoading, user }) => {
               title="Registrarse"
               moreStyle="bg-primary text-white w-full mb-3"
               type="submit"
+              moreStyle="mt-4 mb-2"
             />
           )}
           <div>
@@ -118,7 +119,6 @@ const Register = ({ isAuth, isLoading, user }) => {
               isButton={false}
               title="Ya tienes una cuenta? Inicia sesión"
               href="/login"
-              moreStyle="text-gray-600"
             />
           </div>
         </form>
