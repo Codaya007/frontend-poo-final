@@ -51,6 +51,11 @@
   height: 775px;
   margin: 50px 20px;
   align-items: center;
+  justify-content: center;
+}
+
+.container-payment{
+  width: 700px;
 }
 
 body{

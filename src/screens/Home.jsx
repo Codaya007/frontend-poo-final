@@ -12,7 +12,7 @@ const Home = () => {
       <div className="fixed-bottom text-end">
         <button className="btn btn-primary position-relative me-4 mb-4">
           <FaShoppingCart />
-          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+          <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
             99+
           </span>
         </button>

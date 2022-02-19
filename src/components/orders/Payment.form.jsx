@@ -58,14 +58,32 @@ const CheckoutForm = ({ orderId, amount, setPaid }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <CardElement />
-      </div>
-      <button disabled={!stripe}>
-        {loading ? <Loader /> : `Buy $${amount}`}
-      </button>
-    </form>
+    <div>
+      <form className="form" onSubmit={handleSubmit}>
+        <table className="table align-middle">
+          <tbody>
+            <tr>
+              <td>
+                Numero de Tarjeta
+              </td>
+              <td>
+                Fecha / Codigo Postal
+              </td>
+            </tr>
+            <tr>
+              <td colSpan={2}>
+                <div className="p-4">
+                  <CardElement />
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <button className="btn btn-primary m-2" disabled={!stripe}>
+          {loading ? <Loader /> : `Buy $${amount}`}
+        </button>
+      </form>
+    </div>
   );
 };
 
@@ -81,8 +99,9 @@ function PaymentForm() {
 
   return (
     <Elements stripe={stripePromise}>
-      <div>
-        <div>
+      <div className="container-center">
+        <div className="container-payment bg-light rounded-15 pe-5 ps-5">
+          <h2 className="p-3">Ingrese su Tarjeta</h2>
           <CheckoutForm
             setPaid={(value) => setPaid(value)}
             orderId={orderId}

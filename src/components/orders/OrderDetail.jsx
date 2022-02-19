@@ -55,7 +55,7 @@ const OrderDetail = () => {
   ) : order ? (
     <div className="container-center d-grid">
       {paid && status === "PENDING" && (
-        <div className="h3 ">
+        <div className="h3 text-light mb-4">
           Su pedido será enviado en las próximas 72 horas posteriores a la
           compra.
         </div>
