@@ -32,7 +32,7 @@ const AppRoutes = () => {
    }, [cart]);
 
    return (
-      <div>
+      <div style={{ minHeight: "962px" }}>
          <BrowserRouter>
             <ToastContainer />
             <HeaderNavbar />
