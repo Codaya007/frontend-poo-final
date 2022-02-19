@@ -26,7 +26,7 @@ const CardProduct = ({ product }) => {
           <Link style={{ textDecoration: "none" }} to={`/product/${_id}`}>
             <h5>{name}</h5>
           </Link>
-          <span className="badge rounded-15 bg-success">{price}</span>
+          <span className="badge rounded-15 bg-success">$ {price}</span>
         </div>
         <div className="card-body">
           <img className="img-fluid imagen" src={photo} alt="" />
