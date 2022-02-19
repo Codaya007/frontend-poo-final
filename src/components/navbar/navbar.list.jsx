@@ -11,6 +11,7 @@ const NavbarList = () => {
   const navigate = useNavigate();
   const isAuth = useSelector((state) => state.auth.isAuthenticated);
   const user = useSelector((state) => state.auth.user);
+  const cart = useSelector((state) => state.products.cart);
   // to define the actual route
   const location = useLocation();
 
@@ -41,7 +42,7 @@ const NavbarList = () => {
       )}
       <NavItem
         link="/cart"
-        name="Carrito"
+        name={`Carrito ${cart.length}`}
         listStyle={isActive(location, "/cart")}
       />
       {isAuth && (

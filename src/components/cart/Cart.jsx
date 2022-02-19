@@ -3,20 +3,29 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { clearCart } from "../../data/actions";
 import CartItem from "./Cart.item";
-import { FaCartPlus } from 'react-icons/fa';
+import { FaCartPlus } from "react-icons/fa";
 
 const Cart = () => {
   const cart = useSelector((state) => state.products.cart);
+  const pedidos = useSelector((state) => state.orders.miOrders);
   const isAuth = useSelector((state) => state.auth.isAuthenticated);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleComprar = () => {
-    if (isAuth) {
-      navigate(`/order/envio`);
+    let noPagados = pedidos.filter((e) => !e.paid);
+    if (noPagados.length > 0) {
+      toast.warning(
+        "Tiene pedidos no pagados. Páguelos o elimínelos antes de realizar uno nuevo"
+      );
+      navigate("/user");
     } else {
-      toast.warning("Inicia sesión para poder comprar");
-      navigate("/login");
+      if (isAuth) {
+        navigate(`/order/envio`);
+      } else {
+        toast.warning("Inicia sesión para poder comprar");
+        navigate("/login");
+      }
     }
   };
 
@@ -64,10 +73,15 @@ const Cart = () => {
           <div>
             <span className="text-light h3 mt-6 fst-italic">
               Aún no ha guardado productos en el carrito
-            </span><br />
-            <button className="btn btn-success addCart pb-4 pe-3 ps-3 rounded-15" onClick={() => navigate("/")}>
+            </span>
+            <br />
+            <button
+              className="btn btn-success addCart pb-4 pe-3 ps-3 rounded-15"
+              onClick={() => navigate("/")}
+            >
               <div>
-                <FaCartPlus /><br />
+                <FaCartPlus />
+                <br />
                 <h3>Añadir un nuevo producto</h3>
               </div>
             </button>
