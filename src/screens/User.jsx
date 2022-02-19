@@ -14,10 +14,14 @@ const NavbarUser = ({ handlePage }) => {
   }, [isAuth, navigate, isLoading]);
 
   return (
-    <ul className="list-navbar">
-      <div onClick={(e) => handlePage("profile")}>Mi perfil</div>
-      <div onClick={(e) => handlePage("orders")}>Mis pedidos</div>
-    </ul>
+    <div className="d-flex btn-group mt-4 mb-4">
+      <button className="btn btn-primary" onClick={(e) => handlePage("profile")}>
+        Mi perfil
+      </button>
+      <button className="btn btn-success" onClick={(e) => handlePage("orders")}>
+        Mis pedidos
+      </button>
+    </div>
   );
 };
 
@@ -25,9 +29,11 @@ const User = () => {
   const [page, setPage] = useState("orders");
 
   return (
-    <div>
-      <NavbarUser handlePage={(page) => setPage(page)} />
-      <div>{page === "profile" ? <Profile /> : <Orders />}</div>
+    <div className="container-center">
+      <div className="container bg-light rounded-15">
+        <NavbarUser handlePage={(page) => setPage(page)} />
+        <div>{page === "profile" ? <Profile /> : <Orders />}</div>
+      </div>
     </div>
   );
 };
