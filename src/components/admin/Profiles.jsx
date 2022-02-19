@@ -71,7 +71,44 @@ export const Profiles = () => {
                               dispatch();
                             }}
                           >
-                            Eliminar usuario
+                            Bloquear
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                </tbody>
+              </table>
+            )}
+            <div className="border-top border-3 border-dark mb-2"></div>
+            <span className="h4">Usuarios bloqueados</span>
+            {accounts && (
+              <table className="table table-striped table-bordered ">
+                <thead>
+                  <tr className="table-light">
+                    <th>#</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Email</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {accounts
+                    .filter((e) => e.role === 3)
+                    .map((account) => (
+                      <tr key={account._id}>
+                        <td>{account._id.substring(7, 14)}</td>
+                        <td>{account.name}</td>
+                        <td>{account.lastname}</td>
+                        <td>{account.email}</td>
+                        <td>
+                          <button
+                            className="btn bg-success me-2"
+                            onClick={() => {
+                              dispatch();
+                            }}
+                          >
+                            Desbloquear
                           </button>
                         </td>
                       </tr>
