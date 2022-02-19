@@ -30,7 +30,10 @@ import {
    CREATE_ORDER,
    CLEAR_ORDER,
    GET_ALL_CATEGORIES,
-   SET_PRODUCT_TO_EDIT
+   SET_PRODUCT_TO_EDIT,
+   GET_ALL_USERS,
+   GET_ALL_SALES,
+   SET_LOADING_ADMIN
 } from './types';
 
 
@@ -302,5 +305,40 @@ export const createProduct = (product) => async (dispatch) => {
    }
 }
 
+export const setLoadingAdmin = (value = true) => ({ type: SET_LOADING_ADMIN, payload: value })
+
+// ADMIN
+export const getAllUsers = () => async (dispatch) => {
+   try {
+      dispatch(setLoadingAdmin());
+      const { data } = await axios.get(
+         `${BASEURL}/user/all`,
+         getHeaderToken()
+      );
+      dispatch({ type: GET_ALL_USERS, payload: data });
+   } catch (error) {
+      console.log(error.response.data);
+      toast.error("No se han podido cargar los usuarios");
+   } finally {
+      dispatch(setLoadingAdmin(false));
+   }
+}
+
+
+export const getAllSales = () => async (dispatch) => {
+   try {
+      dispatch(setLoadingAdmin());
+      const { data } = await axios.get(
+         `${BASEURL}/order`,
+         getHeaderToken()
+      );
+      dispatch({ type: GET_ALL_SALES, payload: data });
+   } catch (error) {
+      console.log(error.response.data);
+      toast.error("No se han podido cargar los usuarios");
+   } finally {
+      dispatch(setLoadingAdmin(false));
+   }
+}
 
 export const setProductToEdit = (product) => ({ type: SET_PRODUCT_TO_EDIT, payload: product })
