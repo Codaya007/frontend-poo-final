@@ -20,6 +20,7 @@ import { saveCartLocalStorage } from './helpers/cartLocalStorage';
 import PaymentForm from './components/orders/Payment.form';
 import Dashboard from './components/admin/Dashboard';
 import Productdetail from './screens/ProductDetail';
+import { FaShoppingCart } from 'react-icons/fa';
 
 const AppRoutes = () => {
    const cart = useSelector(state => state.products.cart);
