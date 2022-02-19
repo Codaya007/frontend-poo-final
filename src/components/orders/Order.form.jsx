@@ -82,77 +82,91 @@ const OrderForm = () => {
   }, [loadingOrder, createdOrder, navigate]);
 
   return (
-    <div>
-      <h2>Dirección de envío</h2>
-      <form onSubmit={handleSubmit}>
-        <FormInput
-          type={"text"}
-          title={"País"}
-          name={"country"}
-          placeholder="Ecuador"
-          value={form.country}
-          handleChange={handleChange}
-        />
-        {errors.country && <span>{errors.country}</span>}
-        <FormInput
-          type={"text"}
-          title={"Ciudad"}
-          name={"city"}
-          placeholder="Loja"
-          value={form.city}
-          handleChange={handleChange}
-        />
-        {errors.city && <span>{errors.city}</span>}
-        <FormInput
-          type={"text"}
-          title={"Dirección"}
-          name={"address"}
-          placeholder="Av. Occidental y Luis Crespo"
-          value={form.address}
-          handleChange={handleChange}
-        />
-        {errors.address && <span>{errors.address}</span>}
-        <FormInput
-          type={"text"}
-          title={"Referencia"}
-          name={"reference"}
-          placeholder="Junto a la tienda Camila..."
-          value={form.reference}
-          handleChange={handleChange}
-        />
-        {errors.reference && <span>{errors.reference}</span>}
-        <button onClick={handleSubmit}>Guardar datos</button>
-        <button onClick={handleCancelar}>Cancelar</button>
-      </form>
-      <h2>Productos a comprar</h2>
-      {cart.length && (
-        <table>
-          <thead>
-            <tr>
-              <td>ID</td>
-              <td>Detalle</td>
-              <td>Cantidad</td>
-              <td>Precio Unitario</td>
-              <td>Subtotal</td>
-            </tr>
-          </thead>
-          <tbody>
-            {cart.length &&
-              cart.map((e) => {
-                return (
-                  <tr key={e._id}>
-                    <td>{e._id}</td>
-                    <td>{e.name}</td>
-                    <td>{e.quantity}</td>
-                    <td>{e.price}</td>
-                    <td>{e.price * e.quantity}</td>
-                  </tr>
-                );
-              })}
-          </tbody>
-        </table>
-      )}
-      {loadingOrder && <Loader />}
+    <div className="container-center">
+      <div className=" container card">
+        <h2>Productos a comprar</h2>
+        {cart.length && (
+          <table className="table align-middle table-striped table-bordered">
+            <thead>
+              <tr>
+                <td>ID</td>
+                <td>Detalle</td>
+                <td>Cantidad</td>
+                <td>Precio Unitario</td>
+                <td>Subtotal</td>
+              </tr>
+            </thead>
+            <tbody>
+              {cart.length &&
+                cart.map((e) => {
+                  return (
+                    <tr key={e._id}>
+                      <td>{e._id}</td>
+                      <td>{e.name}</td>
+                      <td>{e.quantity}</td>
+                      <td>{e.price}</td>
+                      <td>{e.price * e.quantity}</td>
+                    </tr>
+                  );
+                })}
+            </tbody>
+          </table>
+        )}
+        {loadingOrder && <Loader />}
+        <span className="h3 pt-2 mt-2 border-top border-4 border-primary" id="Productos">
+          Dirección de envío
+        </span>
+        <form className="card-body row" onSubmit={handleSubmit}>
+          <div className="form col-sm-6 mb-3">
+            <FormInput
+              type={"text"}
+              title={"País"}
+              name={"country"}
+              placeholder="Ecuador"
+              value={form.country}
+              handleChange={handleChange}
+            />
+          </div>
+          {errors.country && <span>{errors.country}</span>}
+          <div className="form col-sm-6 mb-3">
+            <FormInput
+              type={"text"}
+              title={"Ciudad"}
+              name={"city"}
+              placeholder="Loja"
+              value={form.city}
+              handleChange={handleChange}
+            />
+          </div>
+          {errors.city && <span>{errors.city}</span>}
+          <div className="form col-sm-6 mb-3">
+            <FormInput
+              type={"text"}
+              title={"Dirección"}
+              name={"address"}
+              placeholder="Av. Occidental y Luis Crespo"
+              value={form.address}
+              handleChange={handleChange}
+            />
+          </div>
+          {errors.address && <span>{errors.address}</span>}
+          <div className="form col-sm-6 mb-3">
+            <FormInput
+              type={"text"}
+              title={"Referencia"}
+              name={"reference"}
+              placeholder="Junto a la tienda Camila..."
+              value={form.reference}
+              handleChange={handleChange}
+            />
+          </div>
+          {errors.reference && <span>{errors.reference}</span>}
+          <div className="btn-group gap-3">
+            <button className="btn btn-primary" onClick={handleSubmit}>Guardar datos</button>
+            <button className="btn btn-danger" onClick={handleCancelar}>Cancelar</button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

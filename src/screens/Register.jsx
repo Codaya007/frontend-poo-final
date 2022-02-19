@@ -48,8 +48,8 @@ const Register = ({ isAuth, isLoading, user }) => {
 
   return (
     <Container>
-      <div className=" mt-80">
-        <form className="register-form bg-light rounded-15 p-5" onSubmit={onSubmit}>
+      <div className="container-center">
+        <form className=" container register-form bg-light rounded-15 p-5" onSubmit={onSubmit}>
           <h2 className="form-label">Register</h2>
           <FormInput
             title="Nombre"
