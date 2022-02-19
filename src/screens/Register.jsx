@@ -43,13 +43,16 @@ const Register = ({ isAuth, isLoading, user }) => {
     toast(`welcome ${name}`);
 
     if (role === 0) return <Navigate to="/" />;
-    if (role === 1) return <Navigate to="/dashboard/admin" />;
+    if (role === 1) return <Navigate to="/dashboard/admin/products" />;
   }
 
   return (
     <Container>
       <div className="container-center">
-        <form className=" container register-form bg-light rounded-15 p-5" onSubmit={onSubmit}>
+        <form
+          className=" container register-form bg-light rounded-15 p-5"
+          onSubmit={onSubmit}
+        >
           <h2 className="form-label">Register</h2>
           <FormInput
             title="Nombre"
