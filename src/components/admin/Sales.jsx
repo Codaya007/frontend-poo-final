@@ -11,6 +11,8 @@ export const Sales = () => {
     dispatch(getAllSales());
   }, [dispatch]);
 
+  // console.log(sales);
+
   const handleChange = (e) => {
     // const { name, value } = e.target;
     /*Codigo Peticion*/
@@ -60,7 +62,7 @@ export const Sales = () => {
                             aria-labelledby="flush-heading"
                             data-bs-parent="#accordionFlushExample"
                           >
-                            {/* <div className="accordion-body">
+                            <div className="accordion-body">
                               <table className="table table-striped table-hover table-bordered mb-5 align-middle">
                                 <thead>
                                   <tr className="table-light">
@@ -72,34 +74,45 @@ export const Sales = () => {
                                   </tr>
                                 </thead>
                                 <tbody>
-                                  {sale.products.map((p) => {
-                                    return (
-                                      <tr key={p._id}>
-                                        <td>{p._id}</td>
-                                        <td>{p.name}</td>
-                                        <td>{p.price}</td>
-                                        <td>{p.quantity}</td>
-                                        <td>{p.price * p.quantity}</td>
-                                      </tr>
-                                    );
-                                  })}
+                                  {sale.products.length ? (
+                                    sale.products.map((p) => {
+                                      return (
+                                        <tr key={p._id}>
+                                          <td>{p._id}</td>
+                                          <td>{p.name}</td>
+                                          <td>{p.price}</td>
+                                          <td>{p.quantity}</td>
+                                          <td>{p.price * p.quantity}</td>
+                                        </tr>
+                                      );
+                                    })
+                                  ) : (
+                                    <tr>
+                                      <td colSpan={"5"}>No hay productos</td>
+                                    </tr>
+                                  )}
                                 </tbody>
                               </table>
-                            </div> */}
+                            </div>
                           </div>
                         </div>
                       </div>
                     </td>
-                    {/* <td>{sale.user.name + " " + sale.user.lastname}</td>
-                    <td>{sale.user.direction}</td> */}
+                    {/* <td>{sale.user.name + " " + sale.user.lastname}</td> */}
+                    <td>{sale.userId}</td>
+                    <td>
+                      {sale.city}, {sale.country}
+                      <br />
+                      {sale.address}
+                      <br />
+                      {sale.reference}
+                    </td>
                     <td>
                       <select
                         name="stateProduct"
                         className="form-select"
                         onChange={handleChange}
-                        value={
-                          sales.filter((s) => s._id === sale._id)[0].stateSale
-                        }
+                        value={sale.status}
                       >
                         <option value="PENDING">Pendiente</option>
                         <option value="COMPLETED">Entregado</option>
