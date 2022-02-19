@@ -20,7 +20,7 @@ import { saveCartLocalStorage } from './helpers/cartLocalStorage';
 import PaymentForm from './components/orders/Payment.form';
 import Dashboard from './components/admin/Dashboard';
 import Productdetail from './screens/ProductDetail';
-import { FaShoppingCart } from 'react-icons/fa';
+// import { FaShoppingCart } from 'react-icons/fa';
 import { Sales } from './components/admin/Sales';
 import { Profiles } from './components/admin/Profiles';
 
@@ -61,6 +61,7 @@ const AppRoutes = () => {
                   <Route path='*' element={<Error404 />} />
                </Route>
             </Routes>
+            {/* <FaShoppingCart /> */}
          </BrowserRouter>
       </div>
    );
