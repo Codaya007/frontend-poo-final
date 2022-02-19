@@ -12,6 +12,12 @@ const Home = () => {
   // console.log(products);
   return (
     <div className="container containerToReduce">
+      <div className="text-end mt-2">
+        <form className="d-flex ms-3">
+          <input className="form-control me-2 text-login" type="search" placeholder="Search" aria-label="Search" />
+          <button className="btn btn-success text-login" type="submit">Search</button>
+        </form>
+      </div>
       <div className="fixed-bottom text-end">
         <button
           onClick={() => navigate("/cart")}

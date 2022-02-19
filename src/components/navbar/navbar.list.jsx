@@ -36,7 +36,7 @@ const AdminNavbarList = ({ isActive, location }) => {
           isAuth={true}
         />
       )}
-      <button className="btn btn-success" onClick={() => setAdminView(!adminView)}>
+      <button className="btn btn-success me-3" onClick={() => setAdminView(!adminView)}>
         {adminView ? "Ver como usuario" : "Ver como admin"}
       </button>
     </>
@@ -89,7 +89,7 @@ const NavbarList = () => {
   };
 
   return (
-    <Nav Nav className="me-auto " >
+    <Nav className="me-auto " >
       <div className="d-flex">
         {isAuth && user && user.role === 1 ? (
           <AdminNavbarList isActive={isActive} location={location} />
@@ -123,10 +123,6 @@ const NavbarList = () => {
           </div>
         )}
       </div>
-      <form className="d-flex ms-3">
-        <input className="form-control me-2 text-login" type="search" placeholder="Search" aria-label="Search" />
-        <button className="btn btn-outline-success text-login" type="submit">Search</button>
-      </form>
     </Nav >
   );
 };
