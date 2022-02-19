@@ -126,8 +126,8 @@ const OrderForm = () => {
               value={form.country}
               handleChange={handleChange}
             />
+            {errors.country && <span className="badge bg-danger">{errors.country}</span>}
           </div>
-          {errors.country && <span>{errors.country}</span>}
           <div className="form col-sm-6 mb-3">
             <FormInput
               type={"text"}
@@ -137,8 +137,8 @@ const OrderForm = () => {
               value={form.city}
               handleChange={handleChange}
             />
+            {errors.city && <span className="badge bg-danger">{errors.city}</span>}
           </div>
-          {errors.city && <span>{errors.city}</span>}
           <div className="form col-sm-6 mb-3">
             <FormInput
               type={"text"}
@@ -148,8 +148,8 @@ const OrderForm = () => {
               value={form.address}
               handleChange={handleChange}
             />
+            {errors.address && <span className="badge bg-danger">{errors.address}</span>}
           </div>
-          {errors.address && <span>{errors.address}</span>}
           <div className="form col-sm-6 mb-3">
             <FormInput
               type={"text"}
@@ -159,8 +159,8 @@ const OrderForm = () => {
               value={form.reference}
               handleChange={handleChange}
             />
+            {errors.reference && <span className="badge bg-danger">{errors.reference}</span>}
           </div>
-          {errors.reference && <span>{errors.reference}</span>}
           <div className="btn-group gap-3">
             <button className="btn btn-primary" onClick={handleSubmit}>Guardar datos</button>
             <button className="btn btn-danger" onClick={handleCancelar}>Cancelar</button>
