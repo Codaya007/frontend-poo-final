@@ -18,9 +18,9 @@ export const Profiles = () => {
 
   return (
     <div className="container-center">
-      <div className="container dashboard-Admin">
+      <div className="container">
         {accounts ? (
-          <div className="bg-light mt-5 pt-2 rounded">
+          <div className="bg-light rounded">
             <span className="h4">Admin</span>
             {admin && (
               <table className="table table-striped table-hover table-bordered mb-3 align-middle">
