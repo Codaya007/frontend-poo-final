@@ -20,7 +20,9 @@ import { saveCartLocalStorage } from './helpers/cartLocalStorage';
 import PaymentForm from './components/orders/Payment.form';
 import Dashboard from './components/admin/Dashboard';
 import Productdetail from './screens/ProductDetail';
-import { FaShoppingCart } from 'react-icons/fa';
+// import { FaShoppingCart } from 'react-icons/fa';
+import { Sales } from './components/admin/Sales';
+import { Profiles } from './components/admin/Profiles';
 
 const AppRoutes = () => {
    const cart = useSelector(state => state.products.cart);
@@ -52,11 +54,14 @@ const AppRoutes = () => {
                      <Route path=':orderId' element={<PaymentForm />} />
                   </Route>
                   <Route path='dashboard'>
-                     <Route path='admin' element={<Dashboard />} />
+                     <Route path='admin/products' element={<Dashboard />} />
+                     <Route path='admin/sales' element={<Sales />} />
+                     <Route path='admin/users' element={<Profiles />} />
                   </Route>
                   <Route path='*' element={<Error404 />} />
                </Route>
             </Routes>
+            {/* <FaShoppingCart /> */}
          </BrowserRouter>
       </div>
    );

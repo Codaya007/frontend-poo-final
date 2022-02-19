@@ -41,3 +41,8 @@ export const SET_LOADING_ORDERS = "SET_LOADING_ORDERS";
 export const CREATE_ORDER = "CREATE_ORDER";
 export const CLEAR_ORDER = "CLEAR_ORDER";
 export const DELETE_ORDER = "DELETE_ORDER";
+
+// ADMIN
+export const GET_ALL_USERS = "GET_ALL_USERS";
+export const GET_ALL_SALES = "GET_ALL_SALES";
+export const SET_LOADING_ADMIN = "SET_LOADING_ADMIN";
