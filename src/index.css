@@ -28,6 +28,11 @@
   }
 }
 
+@media screen and (max-width: 767px){
+  .text-login{
+    font-size: 12px;
+  }
+}
 
 @media screen and (max-width: 1200px) and (min-width:767px) {
   .imagen{
@@ -46,11 +51,20 @@
   height: 500px;
 }
 
+.td-width{
+  max-width: 50px !important;
+}
+
 .container-center{
   display: flex;
   height: 775px;
   margin: 50px 20px;
   align-items: center;
+  justify-content: center;
+}
+
+.container-payment{
+  width: 700px;
 }
 
 body{
