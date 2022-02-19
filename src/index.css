@@ -22,6 +22,12 @@
   }
 }
 
+@media screen and (max-width: 991px) and (min-width:767px) {
+  .textToReduce{
+    font-size: 12px;
+  }
+}
+
 
 @media screen and (max-width: 1200px) and (min-width:767px) {
   .imagen{
