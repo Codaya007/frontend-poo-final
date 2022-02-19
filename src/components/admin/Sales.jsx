@@ -38,7 +38,7 @@ export const Sales = () => {
               {sales.map((sale) => {
                 return (
                   <tr key={sale._id}>
-                    <td>{sale._id}</td>
+                    <td>{sale._id.substring(7, 14)}</td>
                     <td>
                       <div
                         className="accordion accordion-flush"
