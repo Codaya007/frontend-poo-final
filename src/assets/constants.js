@@ -1,5 +1,5 @@
-// export const BASEURL = "http://localhost:5000/api";
-export const BASEURL = "https://poo-app.herokuapp.com/api";
+export const BASEURL = "http://localhost:5000/api";
+// export const BASEURL = "https://poo-app.herokuapp.com/api";
 
 // USER
 export const USER_GET_INFO = `${BASEURL}/user`;

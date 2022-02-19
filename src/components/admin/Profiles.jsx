@@ -56,26 +56,34 @@ export const Profiles = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {accounts
-                    .filter((e) => e.role === 0)
-                    .map((account) => (
-                      <tr key={account._id}>
-                        <td>{account._id.substring(7, 14)}</td>
-                        <td>{account.name}</td>
-                        <td>{account.lastname}</td>
-                        <td>{account.email}</td>
-                        <td>
-                          <button
-                            className="btn bg-danger me-2"
-                            onClick={() => {
-                              dispatch();
-                            }}
-                          >
-                            Bloquear
-                          </button>
-                        </td>
-                      </tr>
-                    ))}
+                  {accounts.filter((e) => e.role === 0).length ? (
+                    accounts
+                      .filter((e) => e.role === 0)
+                      .map((account) => (
+                        <tr key={account._id}>
+                          <td>{account._id.substring(7, 14)}</td>
+                          <td>{account.name}</td>
+                          <td>{account.lastname}</td>
+                          <td>{account.email}</td>
+                          <td>
+                            <button
+                              className="btn bg-danger me-2"
+                              onClick={() => {
+                                dispatch();
+                              }}
+                            >
+                              Bloquear
+                            </button>
+                          </td>
+                        </tr>
+                      ))
+                  ) : (
+                    <tr>
+                      <td colSpan={"5"}>
+                        Aún no se ha registrado ningún usuario
+                      </td>
+                    </tr>
+                  )}
                 </tbody>
               </table>
             )}
@@ -93,26 +101,34 @@ export const Profiles = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {accounts
-                    .filter((e) => e.role === 3)
-                    .map((account) => (
-                      <tr key={account._id}>
-                        <td>{account._id.substring(7, 14)}</td>
-                        <td>{account.name}</td>
-                        <td>{account.lastname}</td>
-                        <td>{account.email}</td>
-                        <td>
-                          <button
-                            className="btn bg-success me-2"
-                            onClick={() => {
-                              dispatch();
-                            }}
-                          >
-                            Desbloquear
-                          </button>
-                        </td>
-                      </tr>
-                    ))}
+                  {accounts.filter((e) => e.role === 3).length ? (
+                    accounts
+                      .filter((e) => e.role === 3)
+                      .map((account) => (
+                        <tr key={account._id}>
+                          <td>{account._id.substring(7, 14)}</td>
+                          <td>{account.name}</td>
+                          <td>{account.lastname}</td>
+                          <td>{account.email}</td>
+                          <td>
+                            <button
+                              className="btn bg-success me-2"
+                              onClick={() => {
+                                dispatch();
+                              }}
+                            >
+                              Desbloquear
+                            </button>
+                          </td>
+                        </tr>
+                      ))
+                  ) : (
+                    <tr>
+                      <td colSpan={"5"}>
+                        Aún no ha bloqueado a ningún usuario
+                      </td>
+                    </tr>
+                  )}
                 </tbody>
               </table>
             )}
