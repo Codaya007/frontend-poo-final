@@ -53,7 +53,7 @@ const Login = () => {
     const { role } = user;
 
     if (role === 0) return <Navigate to="/" />;
-    if (role === 1) return <Navigate to="/dashboard/admin" />;
+    if (role === 1) return <Navigate to="/dashboard/admin/products" />;
   }
 
   return (
@@ -75,7 +75,9 @@ const Login = () => {
                 type="email"
                 moreClass={["h5", "mb-4"]}
               />
-              {errors.email && <span className="badge bg-danger">{errors.email}</span>}
+              {errors.email && (
+                <span className="badge bg-danger">{errors.email}</span>
+              )}
               <FormInput
                 title="Password"
                 placeholder="*********"
@@ -85,10 +87,19 @@ const Login = () => {
                 type="password"
                 moreClass={["h5", "mb-4"]}
               />
-              {errors.password && <span className="badge bg-danger">{errors.password}</span>}
+              {errors.password && (
+                <span className="badge bg-danger">{errors.password}</span>
+              )}
               <div className="text-start form-check">
-                <input type="checkbox" name="connected" id="" className="form-check-input" />
-                <label htmlFor="connectec" className="form-check-label">Mantenerse conectado</label>
+                <input
+                  type="checkbox"
+                  name="connected"
+                  id=""
+                  className="form-check-input"
+                />
+                <label htmlFor="connectec" className="form-check-label">
+                  Mantenerse conectado
+                </label>
               </div>
               {isLoading && <Loader />}
               {!isLoading && (
