@@ -57,71 +57,69 @@ const Login = () => {
   }
 
   return (
-    <Container>
-      <div className="container-center">
-        <div className="container row bg-light grid-login rounded-15">
-          <div className="col-md-auto">
-            <img src={logo} alt=" " className="img_login" />
-          </div>
-          <div className="col p-5">
-            <form className="" onSubmit={onSubmit}>
-              <h2 className="form-label">Login</h2>
-              <FormInput
-                title="Email"
-                placeholder="alguien@example.com"
-                name="email"
-                value={email}
-                handleChange={handleChange}
-                type="email"
-                moreClass={["h5", "mb-4"]}
+    <div className="container-center">
+      <div className="container row bg-light grid-login rounded-15">
+        <div className="col-md-auto">
+          <img src={logo} alt=" " className="img_login" />
+        </div>
+        <div className="col p-5">
+          <form className="" onSubmit={onSubmit}>
+            <h2 className="form-label">Login</h2>
+            <FormInput
+              title="Email"
+              placeholder="alguien@example.com"
+              name="email"
+              value={email}
+              handleChange={handleChange}
+              type="email"
+              moreClass={["h5", "mb-4"]}
+            />
+            {errors.email && (
+              <span className="badge bg-danger">{errors.email}</span>
+            )}
+            <FormInput
+              title="Password"
+              placeholder="*********"
+              name="password"
+              value={password}
+              handleChange={handleChange}
+              type="password"
+              moreClass={["h5", "mb-4"]}
+            />
+            {errors.password && (
+              <span className="badge bg-danger">{errors.password}</span>
+            )}
+            <div className="text-start form-check">
+              <input
+                type="checkbox"
+                name="connected"
+                id=""
+                className="form-check-input"
               />
-              {errors.email && (
-                <span className="badge bg-danger">{errors.email}</span>
-              )}
-              <FormInput
-                title="Password"
-                placeholder="*********"
-                name="password"
-                value={password}
-                handleChange={handleChange}
-                type="password"
-                moreClass={["h5", "mb-4"]}
+              <label htmlFor="connectec" className="form-check-label">
+                Mantenerse conectado
+              </label>
+            </div>
+            {isLoading && <Loader />}
+            {!isLoading && (
+              <Button
+                title="Ingresar"
+                moreStyle="btn bg-primary text-white w-full mb-3"
+                type="submit"
+                moreStyle="mt-4 mb-4"
               />
-              {errors.password && (
-                <span className="badge bg-danger">{errors.password}</span>
-              )}
-              <div className="text-start form-check">
-                <input
-                  type="checkbox"
-                  name="connected"
-                  id=""
-                  className="form-check-input"
-                />
-                <label htmlFor="connectec" className="form-check-label">
-                  Mantenerse conectado
-                </label>
-              </div>
-              {isLoading && <Loader />}
-              {!isLoading && (
-                <Button
-                  title="Ingresar"
-                  moreStyle="btn bg-primary text-white w-full mb-3"
-                  type="submit"
-                  moreStyle="mt-4 mb-4"
-                />
-              )}
-              <div>
-                <Button
-                  isButton={false}
-                  title="Aún no tienes una cuenta? Registrar"
-                  href="/register"
-                />
-              </div>
-            </form>
-          </div>
+            )}
+            <div>
+              <Button
+                isButton={false}
+                title="Aún no tienes una cuenta? Registrar"
+                href="/register"
+              />
+            </div>
+          </form>
         </div>
       </div>
-    </Container>
+    </div>
   );
 };
 

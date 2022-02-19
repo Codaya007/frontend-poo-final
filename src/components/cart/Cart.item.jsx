@@ -8,7 +8,7 @@ const CartItem = ({ data }) => {
   return (
     <tr>
       <td>
-        <img style={{ width: "120px" }} src={photo} alt={name} />
+        <img style={{ width: "80px" }} src={photo} alt={name} />
       </td>
       <td className="h5">{name}</td>
       <td className="h5">${price}</td>

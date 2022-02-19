@@ -1,3 +1,11 @@
+#root{
+  min-height: 962px;
+}
+
+body{
+  min-height: 962px;
+}
+
 .logo {
   width: 50px;
   height: 50px;
@@ -57,7 +65,8 @@
 
 .container-center{
   display: flex;
-  height: 775px;
+  min-height: calc(862px - 76px);
+  height: 100%;
   margin: 50px 20px;
   align-items: center;
   justify-content: center;
