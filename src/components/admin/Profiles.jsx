@@ -12,7 +12,7 @@ export const Profiles = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    accounts && setAdmin(accounts.filter((e) => e.role === 1));
+    accounts && setAdmin(accounts.find((e) => e.role === 1));
   }, [accounts]);
 
   return (
