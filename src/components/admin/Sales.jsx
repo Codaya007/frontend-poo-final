@@ -5,6 +5,7 @@ import Loader from "../loader/Loader";
 
 export const Sales = () => {
   const sales = useSelector((state) => state.admin.sales);
+  const users = useSelector((state) => state.admin.users);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -100,8 +101,8 @@ export const Sales = () => {
                         </div>
                       </div>
                     </td>
-                    {/* <td>{sale.user.name + " " + sale.user.lastname}</td> */}
-                    <td>{sale.userId}</td>
+                    <td>{sale.user.name + " " + sale.user.lastname}</td>
+                    {/* <td>{sale.userId}</td> */}
                     <td>
                       {sale.city}, {sale.country}
                       <br />
