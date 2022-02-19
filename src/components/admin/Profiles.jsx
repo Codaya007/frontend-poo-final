@@ -17,13 +17,8 @@ export const Profiles = () => {
   }, [accounts]);
 
   return (
-<<<<<<< HEAD
-    <div className="container-center">
-      <div className="container dashboard-Admin">
-=======
     <div className="container dashboard-Admin">
       {accounts ? (
->>>>>>> db4a95753a3dcf0b2851a2ab14a12db185a612a9
         <div className="bg-light mt-5 pt-2 rounded">
           <span className="h4">Admin</span>
           {admin && (
@@ -38,11 +33,7 @@ export const Profiles = () => {
               </thead>
               <tbody>
                 <tr>
-<<<<<<< HEAD
-                  <td>{admin._id}</td>
-=======
                   <td>{admin._id.substring(7, 14)}</td>
->>>>>>> db4a95753a3dcf0b2851a2ab14a12db185a612a9
                   <td>{admin.name}</td>
                   <td>{admin.lastname}</td>
                   <td>{admin.email}</td>
@@ -68,11 +59,7 @@ export const Profiles = () => {
                   .filter((e) => e.role === 0)
                   .map((account) => (
                     <tr key={account._id}>
-<<<<<<< HEAD
-                      <td>{account._id}</td>
-=======
                       <td>{account._id.substring(7, 14)}</td>
->>>>>>> db4a95753a3dcf0b2851a2ab14a12db185a612a9
                       <td>{account.name}</td>
                       <td>{account.lastname}</td>
                       <td>{account.email}</td>
@@ -86,19 +73,15 @@ export const Profiles = () => {
                           Eliminar usuario
                         </button>
                       </td>
-                    </tr>
+                    </tr >
                   ))}
-              </tbody>
-            </table>
+              </tbody >
+            </table >
           )}
-        </div>
-<<<<<<< HEAD
-      </div>
-=======
+        </div >
       ) : (
         <Loader />
       )}
->>>>>>> db4a95753a3dcf0b2851a2ab14a12db185a612a9
-    </div>
+    </div >
   );
 };
