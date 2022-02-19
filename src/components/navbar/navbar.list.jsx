@@ -102,7 +102,7 @@ const NavbarList = () => {
       {isAuth ? (
         <Button
           title="Salir"
-          moreStyle="hover:text-primary"
+          moreStyle="hover:text-primary "
           action={handleLogout}
         />
       ) : (

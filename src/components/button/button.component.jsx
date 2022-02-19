@@ -29,7 +29,7 @@ const Button = ({
       ) : (
         !isToLogin ? (
           <button className="btn btn-primary">
-            <Link to={href}><span className="text-light">{title}</span></Link>
+            <Link to={href}><span className="text-light text-login">{title}</span></Link>
           </button>
         ) : (
           <Link to={href}>{title}</Link>

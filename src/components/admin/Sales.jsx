@@ -21,7 +21,7 @@ export const Sales = () => {
   return (
     <div className="container-fluid">
       <div className="bg-light mt-5 pt-2 rounded">
-        <span className="h4 text-light fst-italic">Ventas</span>
+        <span className="h4 fst-italic">Ventas</span>
         {sales ? (
           <table className="table table-striped table-bordered mb-5">
             <thead className="table-light">
@@ -57,7 +57,7 @@ export const Sales = () => {
                             </button>
                           </h2>
                           <div
-                            _id={"flush-collapse-" + sale._id}
+                            id={"flush-collapse-" + sale._id}
                             className="accordion-collapse collapse"
                             aria-labelledby="flush-heading"
                             data-bs-parent="#accordionFlushExample"
@@ -78,7 +78,9 @@ export const Sales = () => {
                                     sale.products.map((p) => {
                                       return (
                                         <tr key={p._id}>
-                                          <td>{p._id}</td>
+                                          <td className="text-truncate td-width">
+                                            {p._id}
+                                          </td>
                                           <td>{p.name}</td>
                                           <td>{p.price}</td>
                                           <td>{p.quantity}</td>
