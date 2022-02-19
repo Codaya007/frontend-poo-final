@@ -27,8 +27,8 @@ const OrderItem = ({ order }) => {
       <td>{status}</td>
       <td>{paid ? "Pagado" : "No pagado"}</td>
       <td>
-        <button onClick={handleClickDetail}>Ver detalle</button>
-        <button onClick={handleClickEliminar}>Eliminar</button>
+        <button className="btn btn-info me-2" onClick={handleClickDetail}>Ver detalle</button>
+        <button className="btn btn-danger ms-2" onClick={handleClickEliminar}>Eliminar</button>
       </td>
     </tr>
   );

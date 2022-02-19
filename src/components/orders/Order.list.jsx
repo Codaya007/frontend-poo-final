@@ -6,14 +6,14 @@ const OrderList = () => {
   const orders = useSelector((state) => state.orders.miOrders);
 
   return (
-    <table>
+    <table className="table align-middle table-bordered table-striped">
       <thead>
         <tr>
-          <td>Fecha</td>
-          <td>Productos</td>
-          <td>Precio</td>
-          <td>Estado</td>
-          <td>Acción</td>
+          <td className="h4">Fecha</td>
+          <td className="h4">Productos</td>
+          <td className="h4">Precio</td>
+          <td className="h4">Estado</td>
+          <td className="h4">Acción</td>
         </tr>
       </thead>
       <tbody>

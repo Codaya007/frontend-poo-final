@@ -1,20 +1,25 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { deleteProduct, setProductToEdit } from "../../data/actions";
 
 const CardProductAdmin = ({ product }) => {
   const dispatch = useDispatch();
+  const category = useSelector((state) =>
+    state.products.categories.find((e) => e._id === product.category)
+  );
 
   return (
     <div className="col-md-4" key={product._id}>
       <div className="card mt-4">
         <div className="card-header">
           <h4>{product.name}</h4>
-          <span className="badge rounded-pill bg-success">{product.price}</span>
+          <span className="badge rounded-pill bg-success">
+            $ {product.price}
+          </span>
         </div>
         <div className="card-body">
           <p>
-            <mark>{product.category}</mark>
+            <mark>{(category && category.name) || product.category}</mark>
           </p>
           <img className="img-fluid imagen" src={product.photo} alt="" />
           <p>{product.description}</p>

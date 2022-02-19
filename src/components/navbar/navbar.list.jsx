@@ -1,10 +1,69 @@
-import React from "react";
+import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Button from "../button/button.component";
 import NavItem from "./navbar.item";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../data/actions";
 import { Nav } from "react-bootstrap";
+
+const AdminNavbarList = ({ isActive, location }) => {
+  const [adminView, setAdminView] = useState(true);
+
+  return (
+    <>
+      {adminView ? (
+        <>
+          <NavItem
+            link="/dashboard/admin/products"
+            name="Gestionar productos"
+            listStyle={isActive(location, "/dashboard/admin/products")}
+          />
+          <NavItem
+            link="/dashboard/admin/sales"
+            name="Gestionar ventas"
+            listStyle={isActive(location, "/dashboard/admin/sales")}
+          />
+          <NavItem
+            link="/dashboard/admin/users"
+            name="Gestionar usuarios"
+            listStyle={isActive(location, "/dashboard/admin/users")}
+          />
+        </>
+      ) : (
+        <NormalNavbarList
+          isActive={isActive}
+          location={location}
+          isAuth={true}
+        />
+      )}
+      <button onClick={() => setAdminView(!adminView)}>
+        {adminView ? "Ver como usuario" : "Ver como admin"}
+      </button>
+    </>
+  );
+};
+
+const NormalNavbarList = ({ isActive, location, isAuth = false }) => {
+  const cart = useSelector((state) => state.products.cart);
+
+  return (
+    <>
+      <NavItem link="/" name="Home" listStyle={isActive(location, "/")} />
+      <NavItem
+        link="/cart"
+        name={`Carrito ${cart.length}`}
+        listStyle={isActive(location, "/cart")}
+      />
+      {isAuth && (
+        <NavItem
+          link="/user"
+          name="Mi perfil"
+          listStyle={isActive(location, "/user")}
+        />
+      )}
+    </>
+  );
+};
 
 const NavbarList = () => {
   const dispatch = useDispatch();
@@ -31,35 +90,23 @@ const NavbarList = () => {
 
   return (
     <Nav className="me-auto">
-      <NavItem link="/" name="Home" listStyle={isActive(location, "/")} />
-      {isAuth && user && user.role === 1 && (
-        <NavItem
-          link="/dashboard/admin"
-          name="Dashboard"
-          listStyle={isActive(location, "/dashboard/admin")}
+      {isAuth && user && user.role === 1 ? (
+        <AdminNavbarList isActive={isActive} location={location} />
+      ) : (
+        <NormalNavbarList
+          isActive={isActive}
+          location={location}
+          isAuth={isAuth}
         />
       )}
-      <NavItem
-        link="/cart"
-        name="Carrito"
-        listStyle={isActive(location, "/cart")}
-      />
-      {isAuth && (
-        <>
-          <NavItem
-            link="/user"
-            name="Mi perfil"
-            listStyle={isActive(location, "/user")}
-          />
-          <Button
-            title="Salir"
-            moreStyle="hover:text-primary"
-            action={handleLogout}
-          />
-        </>
-      )}
-      {!isAuth && (
-        <div className="d-grid gap-2 d-md-flex justify-content-md-end">
+      {isAuth ? (
+        <Button
+          title="Salir"
+          moreStyle="hover:text-primary"
+          action={handleLogout}
+        />
+      ) : (
+        <div className="d-flex gap-3">
           <Button
             title="Login"
             href="/login"

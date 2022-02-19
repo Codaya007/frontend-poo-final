@@ -53,97 +53,145 @@ const OrderDetail = () => {
   return loading ? (
     <Loader />
   ) : order ? (
-    <div>
+    <div className="container-center d-grid">
       {paid && status === "PENDING" && (
-        <div>
+        <div className="h3 ">
           Su pedido será enviado en las próximas 72 horas posteriores a la
           compra.
         </div>
       )}
-      <h2>Detalles del pedido</h2>
-      <div>
-        <div>
-          <h4>ID del pedido</h4>
-          <p>{_id}</p>
-        </div>
-        <div>
-          <h4>Fecha</h4>
-          <p>{createdAt.split("T")[0]}</p>
-        </div>
-        <div>
-          <h4>Estado</h4>
-          <p>{paid ? "Pagado" : "No pagado"}</p>
-        </div>
-        {paid && (
-          <div>
-            <h4>Entrega</h4>
-            <p>{status === "PENDING" ? "Pendiente" : "Entregada"}</p>
-          </div>
-        )}
-      </div>
-      <div>
-        <h3>Dirección de envío:</h3>
-        <div>
-          <h4>País</h4>
-          <p>{country}</p>
-        </div>
-        <div>
-          <h4>Ciudad</h4>
-          <p>{city}</p>
-        </div>
-        <div>
-          <h4>Dirección</h4>
-          <p>{address}</p>
-        </div>
-        <div>
-          <h4>Referencia</h4>
-          <p>{reference}</p>
-        </div>
-      </div>
-      <h3>Productos comprados</h3>
-      <table>
-        <thead>
-          <tr>
-            <td>ID</td>
-            <td>Producto</td>
-            <td>Precio Unitario</td>
-            <td>Cantidad</td>
-            <td>Subtotal</td>
-          </tr>
-        </thead>
-        <tbody>
-          {products.length ? (
-            products.map((prod) => {
-              return (
-                <tr key={prod._id}>
-                  <td>{prod._id}</td>
-                  <td>{prod.name}</td>
-                  <td>{prod.price}</td>
-                  <td>{prod.quantity}</td>
-                  <td>{Math.round(prod.quantity * prod.price * 100) / 100}</td>
-                </tr>
-              );
-            })
-          ) : (
+      <div className="container bg-light mb-4 rounded-15">
+        <table className="table table-bordered align-middle">
+          <thead>
             <tr>
-              <td colSpan={"5"}>
-                Es posible que sus productos se hayan eliminado
+              <td colSpan={2}>
+                <h3>Detalles del pedido</h3>
               </td>
             </tr>
-          )}
-          <tr>
-            <td colSpan={"4"}>Total</td>
-            <td>${totalAmount}</td>
-          </tr>
-        </tbody>
-      </table>
-      {!paid && (
-        <button
-          onClick={() => navigate(`/payment/${id}?amount=${totalAmount}`)}
-        >
-          Pagar
-        </button>
-      )}
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <h5>ID del pedido</h5>
+              </td>
+              <td>
+                <span>{_id}</span>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <h5>Fecha</h5>
+              </td>
+              <td>
+                <p>{createdAt.split("T")[0]}</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <h5>Estado</h5>
+              </td>
+              <td>
+                <p>{paid ? "Pagado" : "No pagado"}</p>
+              </td>
+            </tr>
+            {paid && (
+              <tr>
+                <td>
+                  <h5>Entrega</h5>
+                  <p>{status === "PENDING" ? "Pendiente" : "Entregada"}</p>
+                </td>
+              </tr>
+            )}
+            <tr>
+              <td colSpan={2}>
+                <h4>Dirección de envío:</h4>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <h5>País</h5>
+              </td>
+              <td>
+                <p>{country}</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <h5>Ciudad</h5>
+              </td>
+              <td>
+                <p>{city}</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <h5>Dirección</h5>
+              </td>
+              <td>
+                <p>{address}</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <h5>Referencia</h5>
+              </td>
+              <td>
+                <p>{reference}</p>
+              </td>
+            </tr>
+            <tr>
+              <td colSpan={2}>
+                {!paid && (
+                  <button className="btn btn-primary" onClick={() => navigate(`/payment/${id}?amount=${totalAmount}`)}>
+                    Pagar
+                  </button>
+                )}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div className="mb-4">
+        <div className="container bg-light rounded-15">
+          <h3>Productos comprados</h3>
+          <table className="table table-bordered align-middle">
+            <thead>
+              <tr>
+                <td className="h5">ID</td>
+                <td className="h5">Producto</td>
+                <td className="h5">Precio Unitario</td>
+                <td className="h5">Cantidad</td>
+                <td className="h5">Subtotal</td>
+              </tr>
+            </thead>
+            <tbody>
+              {products.length ? (
+                products.map((prod) => {
+                  return (
+                    <tr key={prod._id}>
+                      <td>{prod._id}</td>
+                      <td>{prod.name}</td>
+                      <td>{prod.price}</td>
+                      <td>{prod.quantity}</td>
+                      <td>{Math.round(prod.quantity * prod.price * 100) / 100}</td>
+                    </tr>
+                  );
+                })
+              ) : (
+                <tr>
+                  <td colSpan={"5"}>
+                    Es posible que sus productos se hayan eliminado
+                  </td>
+                </tr>
+              )}
+              <tr>
+                <td colSpan={"4"} className="h4">Total</td>
+                <td className="fw-bold">${totalAmount}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   ) : (
     <div>No hay datos</div>
