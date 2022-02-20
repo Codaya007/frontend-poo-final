@@ -89,7 +89,7 @@ export const register = ({
       dispatch(loadUser())
       dispatch(getAllOrdersByUser())
    } catch (err) {
-      const errors = err.response.data.errors
+      const errors = err.response.data.errors;
       console.log(errors);
       if (errors) {
          errors.map(error => toast.error(error.msg))

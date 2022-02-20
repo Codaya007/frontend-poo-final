@@ -98,6 +98,8 @@ const OrderDetail = () => {
               <tr>
                 <td>
                   <h5>Entrega</h5>
+                </td>
+                <td>
                   <p>{status === "PENDING" ? "Pendiente" : "Entregada"}</p>
                 </td>
               </tr>
@@ -142,7 +144,12 @@ const OrderDetail = () => {
             <tr>
               <td colSpan={2}>
                 {!paid && (
-                  <button className="btn btn-primary" onClick={() => navigate(`/payment/${id}?amount=${totalAmount}`)}>
+                  <button
+                    className="btn btn-primary"
+                    onClick={() =>
+                      navigate(`/payment/${id}?amount=${totalAmount}`)
+                    }
+                  >
                     Pagar
                   </button>
                 )}
@@ -173,7 +180,9 @@ const OrderDetail = () => {
                       <td>{prod.name}</td>
                       <td>{prod.price}</td>
                       <td>{prod.quantity}</td>
-                      <td>{Math.round(prod.quantity * prod.price * 100) / 100}</td>
+                      <td>
+                        {Math.round(prod.quantity * prod.price * 100) / 100}
+                      </td>
                     </tr>
                   );
                 })
@@ -185,7 +194,9 @@ const OrderDetail = () => {
                 </tr>
               )}
               <tr>
-                <td colSpan={"4"} className="h4">Total</td>
+                <td colSpan={"4"} className="h4">
+                  Total
+                </td>
                 <td className="fw-bold">${totalAmount}</td>
               </tr>
             </tbody>

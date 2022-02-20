@@ -40,8 +40,6 @@ const Register = ({ isAuth, isLoading, user }) => {
   if (isAuth && user) {
     const { name, role } = user;
 
-    toast(`welcome ${name}`);
-
     if (role === 0) return <Navigate to="/" />;
     if (role === 1) return <Navigate to="/dashboard/admin/products" />;
   }
