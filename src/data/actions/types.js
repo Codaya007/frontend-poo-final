@@ -46,3 +46,6 @@ export const DELETE_ORDER = "DELETE_ORDER";
 export const GET_ALL_USERS = "GET_ALL_USERS";
 export const GET_ALL_SALES = "GET_ALL_SALES";
 export const SET_LOADING_ADMIN = "SET_LOADING_ADMIN";
+export const BLOCK_USER = "BLOCK_USER";
+export const UNLOCK_USER = "UNLOCK_USER";
+export const COMPLETE_ORDER = "COMPLETE_ORDER";

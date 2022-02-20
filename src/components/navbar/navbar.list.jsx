@@ -36,7 +36,7 @@ const AdminNavbarList = ({ isActive, location }) => {
           isAuth={true}
         />
       )}
-      <button onClick={() => setAdminView(!adminView)}>
+      <button className="btn btn-success me-3" onClick={() => setAdminView(!adminView)}>
         {adminView ? "Ver como usuario" : "Ver como admin"}
       </button>
     </>
@@ -89,39 +89,41 @@ const NavbarList = () => {
   };
 
   return (
-    <Nav className="me-auto">
-      {isAuth && user && user.role === 1 ? (
-        <AdminNavbarList isActive={isActive} location={location} />
-      ) : (
-        <NormalNavbarList
-          isActive={isActive}
-          location={location}
-          isAuth={isAuth}
-        />
-      )}
-      {isAuth ? (
-        <Button
-          title="Salir"
-          moreStyle="hover:text-primary "
-          action={handleLogout}
-        />
-      ) : (
-        <div className="d-flex gap-3">
-          <Button
-            title="Login"
-            href="/login"
-            isButton={false}
-            isToLogin={false}
+    <Nav className="me-auto " >
+      <div className="d-flex">
+        {isAuth && user && user.role === 1 ? (
+          <AdminNavbarList isActive={isActive} location={location} />
+        ) : (
+          <NormalNavbarList
+            isActive={isActive}
+            location={location}
+            isAuth={isAuth}
           />
+        )}
+        {isAuth ? (
           <Button
-            title="Registrarse"
-            href="/register"
-            isButton={false}
-            isToLogin={false}
+            title="Salir"
+            moreStyle="hover:text-primary "
+            action={handleLogout}
           />
-        </div>
-      )}
-    </Nav>
+        ) : (
+          <div className="d-flex gap-3">
+            <Button
+              title="Login"
+              href="/login"
+              isButton={false}
+              isToLogin={false}
+            />
+            <Button
+              title="Registrarse"
+              href="/register"
+              isButton={false}
+              isToLogin={false}
+            />
+          </div>
+        )}
+      </div>
+    </Nav >
   );
 };
 
