@@ -81,12 +81,22 @@ const Productdetail = () => {
                   <td colSpan={2}>
                     {quantity > 0 ? (
                       inCart ? (
-                        <button className="btn btn-primary" onClick={handleRemoveFromCart}>Quitar del carrito</button>
+                        <button
+                          className="btn btn-primary"
+                          onClick={handleRemoveFromCart}
+                        >
+                          Quitar del carrito
+                        </button>
                       ) : (
-                        <button className="btn btn-primary" onClick={handleAddCart}>Añadir al carrito</button>
+                        <button
+                          className="btn btn-primary"
+                          onClick={handleAddCart}
+                        >
+                          Añadir al carrito
+                        </button>
                       )
                     ) : (
-                      <button>Producto agotado</button>
+                      <button className="btn btn-info">Producto agotado</button>
                     )}
                   </td>
                 </tr>
