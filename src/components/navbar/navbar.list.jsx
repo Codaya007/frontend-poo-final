@@ -28,6 +28,11 @@ const AdminNavbarList = ({ isActive, location }) => {
             name="Gestionar usuarios"
             listStyle={isActive(location, "/dashboard/admin/users")}
           />
+          <NavItem
+            link="/dashboard/admin/categories"
+            name="Gestionar categorías"
+            listStyle={isActive(location, "/dashboard/admin/categories")}
+          />
         </>
       ) : (
         <NormalNavbarList
@@ -36,7 +41,10 @@ const AdminNavbarList = ({ isActive, location }) => {
           isAuth={true}
         />
       )}
-      <button className="btn btn-success me-3" onClick={() => setAdminView(!adminView)}>
+      <button
+        className="btn btn-success me-3"
+        onClick={() => setAdminView(!adminView)}
+      >
         {adminView ? "Ver como usuario" : "Ver como admin"}
       </button>
     </>
@@ -89,7 +97,7 @@ const NavbarList = () => {
   };
 
   return (
-    <Nav className="me-auto " >
+    <Nav className="me-auto ">
       <div className="d-flex">
         {isAuth && user && user.role === 1 ? (
           <AdminNavbarList isActive={isActive} location={location} />
@@ -123,7 +131,7 @@ const NavbarList = () => {
           </div>
         )}
       </div>
-    </Nav >
+    </Nav>
   );
 };
 
