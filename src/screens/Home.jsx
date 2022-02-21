@@ -1,16 +1,14 @@
-import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React from "react";
+import { useSelector } from "react-redux";
 import CardProduct from "../components/products/Card.product";
 import { FaShoppingCart } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import Filters from "../components/filters/Filters";
-import { RESTART_FILTERS } from "../data/actions/types";
 
 const Home = () => {
   const products = useSelector((state) => state.products.filtered);
   const cart = useSelector((state) => state.products.cart);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   // console.log(products);
   return (

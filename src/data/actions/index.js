@@ -38,7 +38,8 @@ import {
    SET_OPTIONS,
    ORDER_PRODUCTS,
    RESTART_PRODUCTS,
-   FILTER_BY_CATEGORY
+   FILTER_BY_CATEGORY,
+   RESTART_FILTERS
 } from './types';
 
 
@@ -184,11 +185,12 @@ export const searchByName = (search) => async (dispatch) => {
       const { data } = await axios.get(
          `${BASEURL}/product/search?search=${search}`
       );
-      dispatch({ type: SEARCH_BY_NAME, payload: data });
-
+      // console.log(data);
       if (data.length === 0) {
          toast.info("No se hallaron resultados para su búsqueda");
+         dispatch({ type: RESTART_FILTERS });
       } else {
+         dispatch({ type: SEARCH_BY_NAME, payload: data });
          dispatch(orderProducts());
          dispatch(setOptions({ category: "all" }));
       }

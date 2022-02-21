@@ -25,8 +25,9 @@ const Filters = () => {
   const handleSearch = (e) => {
     e.preventDefault();
 
-    if (!search) {
-      handleRestartFilters(e);
+    if (!search.trim()) {
+      setSearch("");
+      toast.info("Ingrese su búsqueda");
     } else {
       dispatch(searchByName(search));
     }
@@ -63,6 +64,7 @@ const Filters = () => {
           type="search"
           placeholder="Search"
           aria-label="Search"
+          value={search}
           onChange={handleChangeSearch}
         />
         <button className="btn btn-success text-login" type="submit">
@@ -115,7 +117,9 @@ const Filters = () => {
             </option>
           ))}
         </select>
-        <button onClick={handleRestartFilters} className="btn btn-secondary">Quitar filtros</button>
+        <button onClick={handleRestartFilters} className="btn btn-secondary">
+          Quitar filtros
+        </button>
       </div>
     </div>
   );
