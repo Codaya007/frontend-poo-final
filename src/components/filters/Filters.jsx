@@ -57,7 +57,7 @@ const Filters = () => {
   };
 
   return (
-    <div className="mt-3 container d-flex justify-content-center">
+    <div className="mt-3 container justify-content-center">
       <form className="d-flex" onSubmit={handleSearch}>
         <input
           className="form-control me-2"
@@ -71,7 +71,7 @@ const Filters = () => {
           Search
         </button>
       </form>
-      <div className="d-flex align-items-center ms-3">
+      <div className="align-items-center ms-3" style={{ margin: "1rem" }}>
         <label className="text-light">Ordenar:</label>
         <select
           title="orderBy"
