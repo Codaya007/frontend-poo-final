@@ -1,22 +1,37 @@
+import axios from "axios";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import { BASEURL } from "../../assets/constants";
 import { getAllSales } from "../../data/actions";
+import getHeaderToken from "../../helpers/getHeaderToken";
 import Loader from "../loader/Loader";
 
 export const Sales = () => {
   const sales = useSelector((state) => state.admin.sales);
-  const users = useSelector((state) => state.admin.users);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getAllSales());
   }, [dispatch]);
 
-  // console.log(sales);
+  const handleChange = async (e, id) => {
+    const { value } = e.target;
 
-  const handleChange = (e) => {
-    // const { name, value } = e.target;
-    /*Codigo Peticion*/
+    try {
+      await axios.put(
+        `${BASEURL}/order/${id}`,
+        { status: value },
+        getHeaderToken()
+      );
+      toast.success(
+        `Se ha marcado como ${value === "PENDING" ? "pendiente" : "completada"}`
+      );
+      dispatch(getAllSales());
+    } catch (err) {
+      toast.error("No se ha podido editar la orden");
+      console.log(err);
+    }
   };
 
   return (
@@ -46,7 +61,10 @@ export const Sales = () => {
                           _id="accordionFlushExample"
                         >
                           <div className="accordion-item">
-                            <h2 className="accordion-header" _id="flush-heading">
+                            <h2
+                              className="accordion-header"
+                              _id="flush-heading"
+                            >
                               <button
                                 className="accordion-button collapsed"
                                 type="button"
@@ -84,9 +102,15 @@ export const Sales = () => {
                                               {p._id}
                                             </td>
                                             <td>{p.name}</td>
-                                            <td>{p.price}</td>
+                                            <td>
+                                              {Math.round(p.price * 100) / 100}
+                                            </td>
                                             <td>{p.quantity}</td>
-                                            <td>{p.price * p.quantity}</td>
+                                            <td>
+                                              {Math.round(
+                                                p.price * p.quantity * 100
+                                              ) / 100}
+                                            </td>
                                           </tr>
                                         );
                                       })
@@ -115,7 +139,7 @@ export const Sales = () => {
                         <select
                           name="stateProduct"
                           className="form-select"
-                          onChange={handleChange}
+                          onChange={(e) => handleChange(e, sale._id)}
                           value={sale.status}
                         >
                           <option value="PENDING">Pendiente</option>
