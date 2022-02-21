@@ -33,7 +33,8 @@ import {
    SET_PRODUCT_TO_EDIT,
    GET_ALL_USERS,
    GET_ALL_SALES,
-   SET_LOADING_ADMIN
+   SET_LOADING_ADMIN,
+   SEARCH_BY_NAME
 } from './types';
 
 
@@ -170,6 +171,19 @@ export const getAllProducts = () => async (dispatch) => {
          type: SET_LOADING_PRODUCTS,
          payload: false
       })
+   }
+}
+
+export const searchByName = (search) => async (dispatch) => {
+   try {
+      const { data } = await axios.get(
+         `${BASEURL}/product/search?search=${search}`
+      );
+      dispatch({ type: SEARCH_BY_NAME, payload: data });
+      (data.length === 0) && toast.info("No se hallaron resultados para su búsqueda");
+   } catch (error) {
+      console.log(error.response.data);
+      toast.error("No se ha podido realizar la búsqueda");
    }
 }
 
