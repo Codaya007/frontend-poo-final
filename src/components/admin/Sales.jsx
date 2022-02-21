@@ -37,9 +37,9 @@ export const Sales = () => {
   return (
     <div className="container-center">
       <div className="container-fluid">
-        <div className="bg-light mt-5 pt-2 rounded">
-          <span className="h4 fst-italic">Ventas</span>
-          {sales ? (
+        {sales ? (
+          <div className="bg-light mt-5 pt-2 rounded">
+            <span className="h4 fst-italic">Ventas</span>
             <table className="table table-striped table-bordered mb-5 align-middle">
               <thead className="table-light">
                 <tr>
@@ -151,10 +151,10 @@ export const Sales = () => {
                 })}
               </tbody>
             </table>
-          ) : (
-            <Loader />
-          )}
-        </div>
+          </div>
+        ) : (
+          <Loader />
+        )}
       </div>
     </div>
   );

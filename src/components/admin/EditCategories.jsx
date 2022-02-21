@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import { BASEURL } from "../../assets/constants";
 import getHeaderToken from "../../helpers/getHeaderToken";
-import { getAllCategories } from "../../data/actions";
+import { getAllCategories, getAllProducts } from "../../data/actions";
 
 const initialForm = {
   name: "",
@@ -38,6 +38,7 @@ export const EditCategories = () => {
       toast.success("Se ha actualizado la categoría");
       handleCleanFields(e);
       dispatch(getAllCategories());
+      dispatch(getAllProducts());
     } catch (err) {
       toast.success("No se ha podido actualizar la categoría");
       console.log(err.response.data);
