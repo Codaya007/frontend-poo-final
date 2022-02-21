@@ -1,5 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { deleteProduct, setProductToEdit } from "../../data/actions";
 
@@ -13,7 +14,12 @@ const CardProductAdmin = ({ product }) => {
     <div className="col-md-3" key={product._id}>
       <div className="card rounded-15 mt-4">
         <div className="card-header">
-          <h4>{product.name}</h4>
+          <Link
+            style={{ textDecoration: "none" }}
+            to={`/product/${product._id}`}
+          >
+            <h4>{product.name}</h4>
+          </Link>
           <span className="badge rounded-pill bg-success">
             $ {product.price}
           </span>
@@ -37,7 +43,9 @@ const CardProductAdmin = ({ product }) => {
               className="dropdown-menu bg-secondary"
               aria-labelledby={"dropdownMenu" + product._id}
             >
-              <p className="ps-2 pe-2 text-light text-justify">{product.description}</p>
+              <p className="ps-2 pe-2 text-light text-justify">
+                {product.description}
+              </p>
             </ul>
           </div>
           <p>
