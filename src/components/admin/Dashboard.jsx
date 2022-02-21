@@ -2,6 +2,7 @@ import React from "react";
 import ProductForm from "./ProductForm";
 import { useSelector } from "react-redux";
 import CardProductAdmin from "../products/Card.product.admin";
+import { EditCategories } from "./EditCategories";
 
 const Dashboard = () => {
   const products = useSelector((state) => state.products.products);
@@ -11,6 +12,9 @@ const Dashboard = () => {
       <div className="container-fluid">
         {/* EDITOR FORM */}
         <ProductForm />
+        <div className="container-sm mt-4">
+          <EditCategories />
+        </div>
         <div className="row">
           {products.length ? (
             products.map((product) => (
