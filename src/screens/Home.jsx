@@ -5,6 +5,7 @@ import { FaShoppingCart } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { searchByName } from "../data/actions";
+import Filters from "../components/filters/Filters";
 
 const Home = () => {
   const products = useSelector((state) => state.products.filtered);
@@ -46,6 +47,9 @@ const Home = () => {
             Search
           </button>
         </form>
+      </div>
+      <div>
+        <Filters />
       </div>
       <div className="fixed-bottom text-end">
         <button
