@@ -128,6 +128,7 @@ const ProductForm = () => {
           >
             {productToEdit ? "Guardar" : "Añadir"}
           </button>
+          &nbsp;&nbsp;&nbsp;
           <button onClick={handleCleanFields} className="btn btn-primary">
             Limpiar campos
           </button>

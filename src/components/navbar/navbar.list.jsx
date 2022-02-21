@@ -28,11 +28,11 @@ const AdminNavbarList = ({ isActive, location }) => {
             name="Gestionar usuarios"
             listStyle={isActive(location, "/dashboard/admin/users")}
           />
-          <NavItem
+          {/* <NavItem
             link="/dashboard/admin/categories"
             name="Gestionar categorías"
             listStyle={isActive(location, "/dashboard/admin/categories")}
-          />
+          /> */}
         </>
       ) : (
         <NormalNavbarList

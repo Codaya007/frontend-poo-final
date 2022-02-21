@@ -77,7 +77,7 @@ export const EditCategories = () => {
             aria-expanded="false"
             aria-controls="flush-collapseOne"
           >
-            Editar Categories
+            Editar Categorías
           </button>
         </h2>
         <div
