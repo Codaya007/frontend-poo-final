@@ -5,7 +5,7 @@ import {
   orderProducts,
   setOptions,
 } from "../../data/actions";
-import { RESTART_PRODUCTS } from "../../data/actions/types";
+import { RESTART_FILTERS, RESTART_PRODUCTS } from "../../data/actions/types";
 
 const Filters = () => {
   const categories = useSelector((state) => state.products.categories);
@@ -18,17 +18,21 @@ const Filters = () => {
     //  console.log(name + " " + value);
 
     dispatch(setOptions({ [name]: value }));
+    if (name === "category") {
+      if (value === "all") {
+        dispatch({ type: RESTART_PRODUCTS });
+      } else {
+        dispatch(filterByCategory(value));
+      }
+    }
     dispatch(orderProducts());
   };
 
-  const handleChangeCategories = (e) => {
-    const { value } = e.target;
+  const handleRestartFilters = (e) => {
+    e.preventDefault();
 
-    if (value === "all") {
-      dispatch({ type: RESTART_PRODUCTS });
-    } else {
-      dispatch(filterByCategory(value));
-    }
+    dispatch({ type: RESTART_FILTERS });
+    dispatch({ type: RESTART_PRODUCTS });
     dispatch(orderProducts());
   };
 
@@ -67,8 +71,9 @@ const Filters = () => {
       <label>Categorías</label>
       <select
         className="form-select"
-        name="name"
-        onChange={handleChangeCategories}
+        name="category"
+        onChange={handleChange}
+        value={options.category}
       >
         <option value={"all"}>Todas</option>
         {categories.map((e) => (
@@ -77,6 +82,7 @@ const Filters = () => {
           </option>
         ))}
       </select>
+      <button onClick={handleRestartFilters}>Quitar filtros</button>
     </div>
   );
 };

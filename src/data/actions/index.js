@@ -168,6 +168,7 @@ export const getAllProducts = () => async (dispatch) => {
          type: GET_ALL_PRODUCTS,
          payload: res.data
       });
+      dispatch(orderProducts());
    } catch (err) {
       toast.error("No se han podido cargar los productos");
       console.log(err);
