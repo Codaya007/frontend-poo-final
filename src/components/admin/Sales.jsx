@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { BASEURL } from "../../assets/constants";
-import { getAllSales } from "../../data/actions";
+import { deleteOrder, getAllSales } from "../../data/actions";
 import getHeaderToken from "../../helpers/getHeaderToken";
 import Loader from "../loader/Loader";
 
@@ -48,6 +48,8 @@ export const Sales = () => {
                   <th>Usuario</th>
                   <th>Direccion</th>
                   <th>Estado</th>
+                  <th>Pagada</th>
+                  <th>Acciones</th>
                 </tr>
               </thead>
               <tbody>
@@ -127,7 +129,6 @@ export const Sales = () => {
                         </div>
                       </td>
                       <td>{sale.user.name + " " + sale.user.lastname}</td>
-                      {/* <td>{sale.userId}</td> */}
                       <td>
                         {sale.city}, {sale.country}
                         <br />
@@ -145,6 +146,18 @@ export const Sales = () => {
                           <option value="PENDING">Pendiente</option>
                           <option value="COMPLETED">Entregado</option>
                         </select>
+                      </td>
+                      <td>{sale.paid ? "Si" : "No"}</td>
+                      <td>
+                        <button
+                          className="btn btn-danger"
+                          onClick={() => {
+                            dispatch(deleteOrder(sale._id));
+                            dispatch(getAllSales());
+                          }}
+                        >
+                          Eliminar
+                        </button>
                       </td>
                     </tr>
                   );
