@@ -1,5 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 import { deleteProduct, setProductToEdit } from "../../data/actions";
 
 const CardProductAdmin = ({ product }) => {
@@ -23,6 +24,23 @@ const CardProductAdmin = ({ product }) => {
           </p>
           <img className="img-fluid imagen" src={product.photo} alt="" />
           <p>{product.description}</p>
+          <p>
+            <mark>Vendidos: {product.sold}</mark>
+          </p>
+          {product.quantity === 0 ? (
+            <button
+              onClick={() =>
+                toast.warn("Producto agotado. Agrege más productos")
+              }
+              className="btn btn-warning"
+            >
+              Agotado
+            </button>
+          ) : (
+            <p>
+              <mark>En stock: {product.quantity}</mark>
+            </p>
+          )}
         </div>
         <div className="card-footer">
           <button

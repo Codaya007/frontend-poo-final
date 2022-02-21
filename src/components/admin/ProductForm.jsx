@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createProduct, updateProduct } from "../../data/actions";
+import {
+  createProduct,
+  setProductToEdit,
+  updateProduct,
+} from "../../data/actions";
 
 const initialForm = {
   name: "",
@@ -28,6 +32,7 @@ const ProductForm = () => {
 
     dispatch(updateProduct(form));
     setForm(initialForm);
+    dispatch(setProductToEdit(null));
   };
 
   const handleCreate = (e) => {
@@ -41,6 +46,7 @@ const ProductForm = () => {
     e.preventDefault();
 
     setForm(initialForm);
+    dispatch(setProductToEdit(null));
   };
 
   useEffect(() => {
