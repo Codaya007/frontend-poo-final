@@ -126,7 +126,7 @@ export const login = (body) => async (dispatch) => {
          console.log(errors);
          errors.forEach(error => toast.error(error.msg))
       } else {
-         toast.error("Usuario o contraseña incorrectos");
+         toast.error(err.response.data);
       }
 
       dispatch({

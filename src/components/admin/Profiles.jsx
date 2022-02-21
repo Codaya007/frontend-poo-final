@@ -1,47 +1,71 @@
-import React, { useEffect, useState } from "react";
+import axios from "axios";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import { BASEURL } from "../../assets/constants";
 import { getAllUsers } from "../../data/actions";
+import getHeaderToken from "../../helpers/getHeaderToken";
 import Loader from "../loader/Loader";
 
 export const Profiles = () => {
   const accounts = useSelector((state) => state.admin.users);
   const dispatch = useDispatch();
-  const [admin, setAdmin] = useState(null);
 
   useEffect(() => {
     dispatch(getAllUsers());
   }, [dispatch]);
 
-  useEffect(() => {
-    accounts && setAdmin(accounts.find((e) => e.role === 1));
-  }, [accounts]);
+  const handleBlockUser = async (id) => {
+    try {
+      await axios.put(`${BASEURL}/user/block/${id}`, null, getHeaderToken());
+      toast.success("Usuario bloqueado");
+      dispatch(getAllUsers());
+    } catch (error) {
+      toast.error("No se ha podido bloquear al usuario");
+      console.log(error.response.data);
+    }
+  };
+
+  const handleUnlockUser = async (id) => {
+    try {
+      await axios.put(`${BASEURL}/user/unlock/${id}`, null, getHeaderToken());
+      toast.success("Usuario desbloqueado");
+      dispatch(getAllUsers());
+    } catch (error) {
+      toast.error("No se ha podido desbloquear al usuario");
+      console.log(error.response.data);
+    }
+  };
 
   return (
     <div className="container-center">
       <div className="container">
         {accounts ? (
           <div className="bg-light rounded">
-            <span className="h4">Admin</span>
-            {admin && (
-              <table className="table table-striped table-hover table-bordered mb-3 align-middle">
-                <thead>
-                  <tr className="table-light">
-                    <th>#</th>
-                    <th>Nombre</th>
-                    <th>Apellido</th>
-                    <th>Email</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>{admin._id.substring(7, 14)}</td>
-                    <td>{admin.name}</td>
-                    <td>{admin.lastname}</td>
-                    <td>{admin.email}</td>
-                  </tr>
-                </tbody>
-              </table>
-            )}
+            <span className="h4">Administradores</span>
+            <table className="table table-striped table-hover table-bordered mb-3 align-middle">
+              <thead>
+                <tr className="table-light">
+                  <th>#</th>
+                  <th>Nombre</th>
+                  <th>Apellido</th>
+                  <th>Email</th>
+                </tr>
+              </thead>
+              <tbody>
+                {accounts.filter((e) => e.role === 1).length &&
+                  accounts
+                    .filter((e) => e.role === 1)
+                    .map((account) => (
+                      <tr key={account._id}>
+                        <td>{account._id.substring(7, 14)}</td>
+                        <td>{account.name}</td>
+                        <td>{account.lastname}</td>
+                        <td>{account.email}</td>
+                      </tr>
+                    ))}
+              </tbody>
+            </table>
             <div className="border-top border-3 border-dark mb-2"></div>
             <span className="h4">Usuarios</span>
             {accounts && (
@@ -68,9 +92,7 @@ export const Profiles = () => {
                           <td>
                             <button
                               className="btn bg-danger me-2"
-                              onClick={() => {
-                                dispatch();
-                              }}
+                              onClick={() => handleBlockUser(account._id)}
                             >
                               Bloquear
                             </button>
@@ -113,9 +135,7 @@ export const Profiles = () => {
                           <td>
                             <button
                               className="btn bg-success me-2"
-                              onClick={() => {
-                                dispatch();
-                              }}
+                              onClick={() => handleUnlockUser(account._id)}
                             >
                               Desbloquear
                             </button>
