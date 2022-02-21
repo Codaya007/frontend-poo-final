@@ -55,9 +55,10 @@ const Home = () => {
         <button
           onClick={() => navigate("/cart")}
           className="btn btn-primary position-relative me-4 mb-4"
+          style={{ fontSize: "28px" }}
         >
           <FaShoppingCart />
-          <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+          <span className="position-absolute top-0 start-120 translate-middle badge rounded-pill bg-danger">
             {cart.length}+
           </span>
         </button>
