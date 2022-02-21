@@ -10,8 +10,8 @@ const CardProductAdmin = ({ product }) => {
   );
 
   return (
-    <div className="col-md-4" key={product._id}>
-      <div className="card mt-4">
+    <div className="col-md-3" key={product._id}>
+      <div className="card rounded-15 mt-4">
         <div className="card-header">
           <h4>{product.name}</h4>
           <span className="badge rounded-pill bg-success">
@@ -23,7 +23,23 @@ const CardProductAdmin = ({ product }) => {
             <mark>{(category && category.name) || product.category}</mark>
           </p>
           <img className="img-fluid imagen" src={product.photo} alt="" />
-          <p>{product.description}</p>
+          <div className="dropend b-grid m-3">
+            <button
+              className="btn btn-info dropdown-toggle"
+              type="button"
+              id={"dropdownMenu" + product._id}
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <span className="textToReduce">Descripcion</span>
+            </button>
+            <ul
+              className="dropdown-menu bg-secondary"
+              aria-labelledby={"dropdownMenu" + product._id}
+            >
+              <p className="ps-2 pe-2 text-light text-justify">{product.description}</p>
+            </ul>
+          </div>
           <p>
             <mark>Vendidos: {product.sold}</mark>
           </p>
