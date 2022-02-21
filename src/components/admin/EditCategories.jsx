@@ -45,6 +45,21 @@ export const EditCategories = () => {
     }
   };
 
+  const handleDelete = async (e) => {
+    e.preventDefault();
+
+    try {
+      await axios.delete(`${BASEURL}/category/${form.id}`, getHeaderToken());
+      toast.success("Se ha borrado la categoría");
+      handleCleanFields(e);
+      dispatch(getAllCategories());
+      dispatch(getAllProducts());
+    } catch (err) {
+      toast.success("No se ha podido eliminar la categoría");
+      console.log(err.response.data);
+    }
+  };
+
   const handleCreate = async (e) => {
     e.preventDefault();
 
@@ -106,6 +121,12 @@ export const EditCategories = () => {
                             value="Guardar"
                             className="btn btn-primary ms-4"
                             onClick={handleEdit}
+                          />
+                          <input
+                            type="button"
+                            value="Eliminar"
+                            className="btn btn-info ms-4"
+                            onClick={handleDelete}
                           />
                           <input
                             type="button"
