@@ -2,8 +2,6 @@ import { getCartLocalStorage } from "../../helpers/cartLocalStorage";
 import {
    GET_ALL_PRODUCTS,
    SET_LOADING_PRODUCTS,
-   ORDER_BY_NAME,
-   ORDER_BY_PRICE,
    FILTER_BY_CATEGORY,
    RESTART_FILTERS,
    GET_ALL_CATEGORIES,
@@ -17,6 +15,7 @@ import {
    REMOVE_ALL_FROM_CART,
    REMOVE_ONE_FROM_CART,
    SET_PRODUCT_TO_EDIT,
+   ORDER_PRODUCTS,
 } from "../actions/types";
 // import { toast } from "react-toastify";
 
@@ -34,6 +33,7 @@ const initialState = {
    options: {
       order: "asc",        // Puede ser: asc o desc
       orderBy: "name",     //Puede ser por: name, price
+      category: "all"
    }
 };
 
@@ -43,6 +43,7 @@ export default function reducer(state = initialState, action) {
       type,
       payload
    } = action;
+   let filtered;
 
    switch (type) {
       // CARRITO
@@ -107,9 +108,12 @@ export default function reducer(state = initialState, action) {
       case GET_ALL_CATEGORIES:
          return { ...state, loadingProducts: false, categories: payload };
       case SET_OPTIONS:
-         const { name, value } = payload;
-         return { ...state, options: { ...state.options, [name]: value } };
-      case FILTER_BY_CATEGORY: //vienen del back ya filtrados
+         // console.log(payload)
+         return { ...state, options: { ...state.options, ...payload } };
+      case FILTER_BY_CATEGORY:
+         filtered = [...state.products];
+         filtered = filtered.filter(e => e.category === payload);
+         return { ...state, filtered };
       case SEARCH_BY_NAME:
          return { ...state, filtered: payload, loadingProducts: false };
       case RESTART_FILTERS:
@@ -117,7 +121,7 @@ export default function reducer(state = initialState, action) {
       case RESTART_PRODUCTS:
          return { ...state, filtered: state.products };
       case PAGINATE_COUNTRIES:
-         let filtered = [...state.filtered];
+         filtered = [...state.filtered];
          let paginatedProducts = [];
 
          if (filtered.length > 0) {
@@ -128,27 +132,24 @@ export default function reducer(state = initialState, action) {
          }
          // Cada que se paginan los productos también establezco la pagina actual como 1
          return { ...state, paginatedProducts, currentProducts: paginatedProducts[0], currentPage: 1 };
-      case ORDER_BY_NAME:
-      case ORDER_BY_PRICE:
+      case ORDER_PRODUCTS:
          const { order, orderBy } = state.options;
+         // console.log(state);
+         filtered = [...state.filtered];
 
          if (orderBy === "name") {
             if (order === "asc") {
-               filtered = [...state.filtered];
                filtered = filtered.sort((a, b) => a.name.localeCompare(b.name));
                return { ...state, filtered };
             } else {
-               filtered = [...state.filtered];
                filtered = filtered.sort((a, b) => b.name.localeCompare(a.name));
                return { ...state, filtered };
             }
          } else {
             if (order === "asc") {
-               filtered = [...state.filtered];
                filtered = filtered.sort((a, b) => a.price - b.price);
                return { ...state, filtered };
             } else {
-               filtered = [...state.filtered];
                filtered = filtered.sort((a, b) => b.price - a.price);
                return { ...state, filtered };
             }
