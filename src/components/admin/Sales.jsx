@@ -25,7 +25,7 @@ export const Sales = () => {
         getHeaderToken()
       );
       toast.success(
-        `Se ha marcado como ${value === "PENDING" ? "pendiente" : "completada"}`
+        `Se ha marcado como ${value === "PENDING" ? "pendiente" : "entregada"}`
       );
       dispatch(getAllSales());
     } catch (err) {
@@ -122,6 +122,23 @@ export const Sales = () => {
                                       </tr>
                                     )}
                                   </tbody>
+                                  <tfoot>
+                                    <tr>
+                                      <td colSpan={"4"}>Total</td>
+                                      <td>{sale.totalAmount}</td>
+                                    </tr>
+                                    <tr>
+                                      <td colSpan={"5"}>
+                                        Pedido realizado el:{" "}
+                                        {sale.createdAt.split("T")[0]}{" "}
+                                        {
+                                          sale.createdAt
+                                            .split("T")[1]
+                                            .split(".")[0]
+                                        }
+                                      </td>
+                                    </tr>
+                                  </tfoot>
                                 </table>
                               </div>
                             </div>
