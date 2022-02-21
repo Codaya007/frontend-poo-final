@@ -10,27 +10,7 @@ const Home = () => {
   const products = useSelector((state) => state.products.filtered);
   const cart = useSelector((state) => state.products.cart);
   const navigate = useNavigate();
-<<<<<<< HEAD
-=======
   const dispatch = useDispatch();
-
-  const handleChangeSearch = (e) => {
-    const { value } = e.target;
-
-    setSearch(value);
-  };
-
-  const handleSearch = (e) => {
-    e.preventDefault();
-
-    if (!search.trim()) {
-      setSearch("");
-      toast.info("Ingrese su búsqueda");
-    } else {
-      dispatch(searchByName(search));
-    }
-  };
->>>>>>> c2f7043b4f6cb6c7300c9b8955d5f7f91041bb2b
 
   // console.log(products);
   return (

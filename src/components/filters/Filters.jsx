@@ -26,7 +26,7 @@ const Filters = () => {
     e.preventDefault();
 
     if (!search) {
-      toast.info("Ingrese su búsqueda");
+      handleRestartFilters(e);
     } else {
       dispatch(searchByName(search));
     }
