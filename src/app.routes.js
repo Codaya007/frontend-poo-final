@@ -23,6 +23,7 @@ import Productdetail from './screens/ProductDetail';
 // import { FaShoppingCart } from 'react-icons/fa';
 import { Sales } from './components/admin/Sales';
 import { Profiles } from './components/admin/Profiles';
+import { EditCategories } from './components/admin/EditCategories';
 
 const AppRoutes = () => {
    const cart = useSelector(state => state.products.cart);
@@ -55,6 +56,7 @@ const AppRoutes = () => {
                   </Route>
                   <Route path='dashboard'>
                      <Route path='admin/products' element={<Dashboard />} />
+                     <Route path='admin/categories' element={<EditCategories />} />
                      <Route path='admin/sales' element={<Sales />} />
                      <Route path='admin/users' element={<Profiles />} />
                   </Route>

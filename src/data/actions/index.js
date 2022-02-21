@@ -89,7 +89,7 @@ export const register = ({
       dispatch(loadUser())
       dispatch(getAllOrdersByUser())
    } catch (err) {
-      const errors = err.response.data.errors
+      const errors = err.response.data.errors;
       console.log(errors);
       if (errors) {
          errors.map(error => toast.error(error.msg))
@@ -126,7 +126,7 @@ export const login = (body) => async (dispatch) => {
          console.log(errors);
          errors.forEach(error => toast.error(error.msg))
       } else {
-         toast.error("Usuario o contraseña incorrectos");
+         toast.error(err.response.data);
       }
 
       dispatch({
