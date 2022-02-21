@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, delFromCart } from "../../data/actions";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const CardProduct = ({ product }) => {
-  const { name, photo, price, description, _id } = product;
+  const { name, photo, price, description, _id, quantity } = product;
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.products.cart);
   const [inCart, setInCart] = useState(cart.find((e) => e._id === _id));
@@ -49,11 +50,23 @@ const CardProduct = ({ product }) => {
           </div>
         </div>
         <div className="card-footer">
-          <button
-            className="btn btn-primary"
-            onClick={inCart ? handleRemoveFromCart : handleAddCart}>
-            <span className="textToReduce">{inCart ? "Quitar del carrito" : "Añadir al carrito"}</span>
-          </button>
+          {quantity === 0 ? (
+            <button
+              className="btn btn-warning"
+              onClick={() => toast.warn("Producto agotado")}
+            >
+              Agotado
+            </button>
+          ) : (
+            <button
+              className="btn btn-primary"
+              onClick={inCart ? handleRemoveFromCart : handleAddCart}
+            >
+              <span className="textToReduce">
+                {inCart ? "Quitar del carrito" : "Añadir al carrito"}
+              </span>
+            </button>
+          )}
         </div>
       </div>
     </div>
