@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { searchByName } from "../data/actions";
 import Filters from "../components/filters/Filters";
+import { RESTART_FILTERS } from "../data/actions/types";
 
 const Home = () => {
   const products = useSelector((state) => state.products.filtered);
@@ -23,7 +24,8 @@ const Home = () => {
   const handleSearch = (e) => {
     e.preventDefault();
 
-    if (!search) {
+    if (!search.trim()) {
+      setSearch("");
       toast.info("Ingrese su búsqueda");
     } else {
       dispatch(searchByName(search));

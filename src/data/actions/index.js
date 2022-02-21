@@ -185,7 +185,13 @@ export const searchByName = (search) => async (dispatch) => {
          `${BASEURL}/product/search?search=${search}`
       );
       dispatch({ type: SEARCH_BY_NAME, payload: data });
-      (data.length === 0) && toast.info("No se hallaron resultados para su búsqueda");
+
+      if (data.length === 0) {
+         toast.info("No se hallaron resultados para su búsqueda");
+      } else {
+         dispatch(orderProducts());
+         dispatch(setOptions({ category: "all" }));
+      }
    } catch (error) {
       console.log(error.response.data);
       toast.error("No se ha podido realizar la búsqueda");
