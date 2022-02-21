@@ -5,7 +5,7 @@ import store from './data/store'
 // routes config
 import AppRoutes from './app.routes';
 import { useEffect } from 'react';
-import { loadUser, getAllProducts, setLoadingAuth, getAllOrdersByUser, getAllCategories } from './data/actions';
+import { loadUser, getAllProducts, setLoadingAuth, getAllOrdersByUser, getAllCategories, orderProducts } from './data/actions';
 
 function App() {
 

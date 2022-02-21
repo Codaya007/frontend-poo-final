@@ -34,7 +34,12 @@ import {
    GET_ALL_USERS,
    GET_ALL_SALES,
    SET_LOADING_ADMIN,
-   SEARCH_BY_NAME
+   SEARCH_BY_NAME,
+   SET_OPTIONS,
+   ORDER_PRODUCTS,
+   RESTART_PRODUCTS,
+   FILTER_BY_CATEGORY,
+   RESTART_FILTERS
 } from './types';
 
 
@@ -164,6 +169,7 @@ export const getAllProducts = () => async (dispatch) => {
          type: GET_ALL_PRODUCTS,
          payload: res.data
       });
+      dispatch(orderProducts());
    } catch (err) {
       toast.error("No se han podido cargar los productos");
       console.log(err);
@@ -179,8 +185,15 @@ export const searchByName = (search) => async (dispatch) => {
       const { data } = await axios.get(
          `${BASEURL}/product/search?search=${search}`
       );
-      dispatch({ type: SEARCH_BY_NAME, payload: data });
-      (data.length === 0) && toast.info("No se hallaron resultados para su búsqueda");
+      // console.log(data);
+      if (data.length === 0) {
+         toast.info("No se hallaron resultados para su búsqueda");
+         dispatch({ type: RESTART_FILTERS });
+      } else {
+         dispatch({ type: SEARCH_BY_NAME, payload: data });
+         dispatch(orderProducts());
+         dispatch(setOptions({ category: "all" }));
+      }
    } catch (error) {
       console.log(error.response.data);
       toast.error("No se ha podido realizar la búsqueda");
@@ -199,7 +212,7 @@ export const getAllOrdersByUser = () => async (dispatch) => {
       dispatch(setLoadingOrders(true));
       // Realizo la petición a la API
       const res = await axios.get(URL_GET_ORDERS_BY_USER, getHeaderToken());
-      console.log(res.data);
+      // console.log(res.data);
 
       dispatch({
          type: GET_ORDERS_BY_USER,
@@ -356,3 +369,15 @@ export const getAllSales = () => async (dispatch) => {
 }
 
 export const setProductToEdit = (product) => ({ type: SET_PRODUCT_TO_EDIT, payload: product })
+
+export const setOptions = (newOptions) => {
+   return { type: SET_OPTIONS, payload: newOptions };
+}
+
+export const orderProducts = () => {
+   return { type: ORDER_PRODUCTS };
+}
+
+export const filterByCategory = (categoryId) => {
+   return { type: FILTER_BY_CATEGORY, payload: categoryId };
+}

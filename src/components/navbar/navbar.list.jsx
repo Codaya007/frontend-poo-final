@@ -8,6 +8,7 @@ import { Nav } from "react-bootstrap";
 
 const AdminNavbarList = ({ isActive, location }) => {
   const [adminView, setAdminView] = useState(true);
+  const navigate = useNavigate();
 
   return (
     <>
@@ -41,12 +42,27 @@ const AdminNavbarList = ({ isActive, location }) => {
           isAuth={true}
         />
       )}
-      <button
-        className="btn btn-success me-3"
-        onClick={() => setAdminView(!adminView)}
-      >
-        {adminView ? "Ver como usuario" : "Ver como admin"}
-      </button>
+      {adminView ? (
+        <button
+          className="btn btn-success me-3"
+          onClick={() => {
+            setAdminView(false);
+            navigate("/");
+          }}
+        >
+          Ver como usuario
+        </button>
+      ) : (
+        <button
+          className="btn btn-success me-3"
+          onClick={() => {
+            setAdminView(true);
+            navigate("/dashboard/admin/products");
+          }}
+        >
+          Ver como admin
+        </button>
+      )}
     </>
   );
 };

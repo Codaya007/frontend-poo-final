@@ -96,7 +96,16 @@ const Productdetail = () => {
                         </button>
                       )
                     ) : (
-                      <button className="btn btn-info">Producto agotado</button>
+                      <button
+                        onClick={() =>
+                          toast.warn(
+                            "Ya no quedan más unidades en stock. Lamentamos las molestias"
+                          )
+                        }
+                        className="btn btn-info"
+                      >
+                        Producto agotado
+                      </button>
                     )}
                   </td>
                 </tr>
