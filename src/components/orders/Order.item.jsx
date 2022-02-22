@@ -25,10 +25,14 @@ const OrderItem = ({ order }) => {
       </td>
       <td>US${totalAmount}</td>
       <td>{status}</td>
-      <td>{paid ? "Pagado" : "No pagado"}</td>
+      <td>{paid ? "Si" : "No"}</td>
       <td>
-        <button className="btn btn-info me-2" onClick={handleClickDetail}>Ver detalle</button>
-        <button className="btn btn-danger ms-2" onClick={handleClickEliminar}>Eliminar</button>
+        <button className="btn btn-info me-2" onClick={handleClickDetail}>
+          Ver detalle
+        </button>
+        <button className="btn btn-danger ms-2" onClick={handleClickEliminar}>
+          Eliminar
+        </button>
       </td>
     </tr>
   );
