@@ -40,7 +40,7 @@ export const EditCategories = () => {
       dispatch(getAllCategories());
       dispatch(getAllProducts());
     } catch (err) {
-      toast.success("No se ha podido actualizar la categoría");
+      toast.error("No se ha podido actualizar la categoría");
       console.log(err.response.data);
     }
   };
@@ -55,7 +55,7 @@ export const EditCategories = () => {
       dispatch(getAllCategories());
       dispatch(getAllProducts());
     } catch (err) {
-      toast.success("No se ha podido eliminar la categoría");
+      toast.error("No se ha podido eliminar la categoría");
       console.log(err.response.data);
     }
   };
@@ -69,7 +69,7 @@ export const EditCategories = () => {
       handleCleanFields(e);
       dispatch(getAllCategories());
     } catch (err) {
-      toast.success("No se ha podido crear la nueva categoría");
+      toast.error("No se ha podido crear la nueva categoría");
       console.log(err.response.data);
     }
   };
