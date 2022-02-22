@@ -13,6 +13,7 @@ const OrderList = () => {
           <td className="h4">Productos</td>
           <td className="h4">Precio</td>
           <td className="h4">Estado</td>
+          <td className="h4">Pagado</td>
           <td className="h4">Acción</td>
         </tr>
       </thead>
