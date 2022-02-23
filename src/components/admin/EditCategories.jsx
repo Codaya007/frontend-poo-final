@@ -48,6 +48,7 @@ export const EditCategories = () => {
 
   const handleDelete = async (e) => {
     e.preventDefault();
+
     if (products.filter((el) => el.category === form.id).length > 0) {
       toast.error("No puede eliminar categorías que contengan productos");
     } else {
