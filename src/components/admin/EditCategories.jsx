@@ -12,6 +12,7 @@ const initialForm = {
 
 export const EditCategories = () => {
   const categories = useSelector((state) => state.products.categories);
+  const products = useSelector((state) => state.products.products);
   const [form, setForm] = useState(initialForm);
   const [edit, setEdit] = useState(false);
   const dispatch = useDispatch();
@@ -40,23 +41,26 @@ export const EditCategories = () => {
       dispatch(getAllCategories());
       dispatch(getAllProducts());
     } catch (err) {
-      toast.success("No se ha podido actualizar la categoría");
+      toast.error("No se ha podido actualizar la categoría");
       console.log(err.response.data);
     }
   };
 
   const handleDelete = async (e) => {
     e.preventDefault();
-
-    try {
-      await axios.delete(`${BASEURL}/category/${form.id}`, getHeaderToken());
-      toast.success("Se ha borrado la categoría");
-      handleCleanFields(e);
-      dispatch(getAllCategories());
-      dispatch(getAllProducts());
-    } catch (err) {
-      toast.success("No se ha podido eliminar la categoría");
-      console.log(err.response.data);
+    if (products.filter((el) => el.category === form.id).length > 0) {
+      toast.error("No puede eliminar categorías que contengan productos");
+    } else {
+      try {
+        await axios.delete(`${BASEURL}/category/${form.id}`, getHeaderToken());
+        toast.success("Se ha borrado la categoría");
+        handleCleanFields(e);
+        dispatch(getAllCategories());
+        dispatch(getAllProducts());
+      } catch (err) {
+        toast.error("No se ha podido eliminar la categoría");
+        console.log(err.response.data);
+      }
     }
   };
 
@@ -69,7 +73,7 @@ export const EditCategories = () => {
       handleCleanFields(e);
       dispatch(getAllCategories());
     } catch (err) {
-      toast.success("No se ha podido crear la nueva categoría");
+      toast.error("No se ha podido crear la nueva categoría");
       console.log(err.response.data);
     }
   };

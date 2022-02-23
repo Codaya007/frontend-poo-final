@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 import {
   createProduct,
   setProductToEdit,
@@ -13,6 +14,60 @@ const initialForm = {
   category: "",
   quantity: "",
   photo: "",
+};
+
+const validateForm = (form) => {
+  let errors = 0;
+  let { name, description, price, category, quantity, photo } = form;
+  price += "";
+  quantity += "";
+
+  // name
+  if (!name.trim()) {
+    toast.error("El campo nombre es requerido");
+    errors += 1;
+  }
+
+  // description
+  if (!description.trim()) {
+    toast.error("El campo descripción es requerido");
+    errors += 1;
+  } else if (description.length < 10) {
+    toast.error("El campo descripción debe tener mínimo 10 caracteres");
+    errors += 1;
+  }
+
+  // price
+  if (!price.trim()) {
+    toast.error("El campo price es requerido");
+    errors += 1;
+  } else if (parseFloat(price) < 0) {
+    toast.error("El campo precio debe ser un numero entero positivo");
+    errors += 1;
+  }
+
+  // category
+  if (!category.trim()) {
+    toast.error("El campo categoría es requerido");
+    errors += 1;
+  }
+
+  // quantity
+  if (!quantity.trim()) {
+    toast.error("El campo cantidad es requerido");
+    errors += 1;
+  } else if (parseInt(quantity) < 0) {
+    toast.error("El campo cantidad debe ser un numero entero positivo");
+    errors += 1;
+  }
+
+  //photo
+  if (!photo.trim()) {
+    toast.error("El campo Url es requerido");
+    errors += 1;
+  }
+
+  return errors;
 };
 
 const ProductForm = () => {
@@ -30,16 +85,20 @@ const ProductForm = () => {
   const handleEdit = (e, id) => {
     e.preventDefault();
 
-    dispatch(updateProduct(form));
-    setForm(initialForm);
-    dispatch(setProductToEdit(null));
+    if (!validateForm(form)) {
+      dispatch(updateProduct(form));
+      setForm(initialForm);
+      dispatch(setProductToEdit(null));
+    }
   };
 
   const handleCreate = (e) => {
     e.preventDefault();
 
-    dispatch(createProduct(form));
-    setForm(initialForm);
+    if (!validateForm(form)) {
+      dispatch(createProduct(form));
+      setForm(initialForm);
+    }
   };
 
   const handleCleanFields = (e) => {
@@ -64,7 +123,7 @@ const ProductForm = () => {
             className="form-control"
             type="text"
             name="name"
-            placeholder="name"
+            placeholder="Nombre"
             onChange={handleChange}
             value={form.name}
           ></input>
@@ -74,7 +133,7 @@ const ProductForm = () => {
             className="form-control"
             type="text"
             name="description"
-            placeholder="description"
+            placeholder="Descripcion"
             onChange={handleChange}
             value={form.description}
           ></input>
@@ -83,9 +142,9 @@ const ProductForm = () => {
           <span className="input-group-text">$ </span>
           <input
             className="form-control"
-            type="text"
+            type="number"
             name="price"
-            placeholder="price"
+            placeholder="Precio"
             onChange={handleChange}
             value={form.price}
           ></input>
@@ -95,7 +154,7 @@ const ProductForm = () => {
             className="form-control"
             type="number"
             name="quantity"
-            placeholder="quantity"
+            placeholder="Cantidad"
             onChange={handleChange}
             value={form.quantity}
           ></input>
@@ -106,7 +165,7 @@ const ProductForm = () => {
             className="form-control"
             type="text"
             name="photo"
-            placeholder="photo"
+            placeholder="Url de una imagen del producto"
             onChange={handleChange}
             value={form.photo}
           ></input>
